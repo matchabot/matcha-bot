@@ -1,0 +1,21 @@
+{
+  "name": "matcha-bot",
+  "license": "MIT",
+  "author": {
+    "name": "raphaelmansuy"
+  },
+  "description": "A cool code template generator 🍵",
+  "private": "true",
+  "version": "0.0.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "yarn matcha-bot-cli dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
