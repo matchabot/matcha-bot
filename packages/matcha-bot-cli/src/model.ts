@@ -32,10 +32,7 @@ export type ActionGenerate = Action & {
 export type Command = {
   name: string
   args: Argument[]
-  actions: (ActionGenerate|Action)[]
+  actions: ActionGenerate[]
 }
 
-export type Commands = Record<string,Command>
-
-
-
+export type Commands = Record<string, Command>

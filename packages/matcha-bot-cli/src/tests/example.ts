@@ -20,7 +20,7 @@ export const commands: Commands = {
         type: "template",
         name: "Generate Story",
         outFile: "Component/${name}/index.stories.ts",
-        sourceTemplate: "component.test.ts"
+        sourceTemplate: "component.stories.ts"
       }
     ],
     args: [
@@ -49,6 +49,7 @@ export const commands: Commands = {
     ],
     actions: [
       {
+        type: "template",
         name: "geninvoice",
         outFile: "./invoide-{invoice-number}.txt",
         sourceTemplate: "./invoiceTemplate.txt"
