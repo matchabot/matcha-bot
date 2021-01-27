@@ -27,7 +27,16 @@ export declare type ActionGenerate = Action & {
 };
 export declare type Command = {
     name: string;
+    description?: string;
     args: Argument[];
-    actions: (ActionGenerate | Action)[];
+    actions: ActionGenerate[];
+    templateDir?: string;
 };
 export declare type Commands = Record<string, Command>;
+/**
+ * Matcha Configuration
+ */
+export declare type Configuration = {
+    outputDirectory: string;
+    commands: Commands;
+};

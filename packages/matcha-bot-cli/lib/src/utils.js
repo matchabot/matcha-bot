@@ -14,7 +14,7 @@ const getCommandNames = (commands) => exports.getCommands(commands).map((c) => c
 exports.getCommandNames = getCommandNames;
 const askCommandArgs = async (args) => {
     // generate a list of questions
-    const questions = args.map((arg) => {
+    const choices = args.map((arg) => {
         var _a;
         return ({
             type: "input",
@@ -22,7 +22,13 @@ const askCommandArgs = async (args) => {
             message: (_a = arg.description) !== null && _a !== void 0 ? _a : `${arg.name}`
         });
     });
-    const responses = await enquirer_1.prompt(questions);
-    return responses;
+    const question = {
+        type: "form",
+        name: "parameters",
+        message: "Parameters:",
+        choices
+    };
+    const responses = await enquirer_1.prompt(question);
+    return responses.parameters;
 };
 exports.askCommandArgs = askCommandArgs;

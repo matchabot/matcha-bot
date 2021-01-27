@@ -4,24 +4,25 @@ exports.commands = void 0;
 exports.commands = {
     "create-component": {
         name: "create-component",
+        description: "Create a React component",
         actions: [
             {
                 type: "template",
                 name: "Generate React Component",
-                outFile: "Component/${name}/index.ts",
+                outFile: "Component/{{name}}/index.ts",
                 sourceTemplate: "component.ts"
             },
             {
                 type: "template",
                 name: "Generate Test",
-                outFile: "Component/${name}/index.test.ts",
+                outFile: "Component/{{name}}/index.test.ts",
                 sourceTemplate: "component.test.ts"
             },
             {
                 type: "template",
                 name: "Generate Story",
-                outFile: "Component/${name}/index.stories.ts",
-                sourceTemplate: "component.test.ts"
+                outFile: "Component/{{name}}/index.stories.ts",
+                sourceTemplate: "component.stories.ts"
             }
         ],
         args: [
@@ -33,7 +34,7 @@ exports.commands = {
         ]
     },
     "generate-invoice": {
-        name: "create-story",
+        name: "generate-invoice",
         args: [
             {
                 name: "company",
@@ -44,14 +45,15 @@ exports.commands = {
                 type: "string"
             },
             {
-                name: "invoice-number",
+                name: "invoiceNumber",
                 type: "number"
             }
         ],
         actions: [
             {
+                type: "template",
                 name: "geninvoice",
-                outFile: "./invoide-{invoice-number}.txt",
+                outFile: "./invoide-{invoiceNumber}.txt",
                 sourceTemplate: "./invoiceTemplate.txt"
             }
         ]

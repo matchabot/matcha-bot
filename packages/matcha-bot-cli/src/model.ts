@@ -31,8 +31,18 @@ export type ActionGenerate = Action & {
 
 export type Command = {
   name: string
+  description?: string
   args: Argument[]
   actions: ActionGenerate[]
+  templateDir?: string
 }
 
 export type Commands = Record<string, Command>
+
+/**
+ * Matcha Configuration
+ */
+export type Configuration = {
+  outputDirectory: string
+  commands: Commands
+}

@@ -1,0 +1,26 @@
+{
+  "name": "generate-invoice",
+  "description": "Generate an invoice",
+  "args": [
+    {
+      "name": "company",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": "string"
+    },
+    {
+      "name": "invoiceNumber",
+      "type": "string"
+    }
+  ],
+  "actions": [
+    {
+      "type": "template",
+      "name": "Generate Invoice",
+      "outFile": "{{invoiceNumber}}.xml",
+      "sourceTemplate": "invoice.xml"
+    }
+  ]
+}

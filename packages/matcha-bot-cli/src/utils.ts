@@ -1,5 +1,5 @@
 import { Commands, Command, Argument } from "./model"
-import { prompt } from "enquirer"
+import { prompt } from "inquirer"
 
 export const getCommands = (commands: Commands) => {
   return Object.keys(commands).map((k) => commands[k])
