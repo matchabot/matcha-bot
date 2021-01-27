@@ -4,13 +4,14 @@ import fs from "fs-extra"
 import path from "path"
 import { registerHelper } from "./register-helper"
 import { prompt } from "inquirer"
+import ora from "ora"
 
 registerHelper()
 
 /**
- * 
- * @param templateSpec 
- * @param data 
+ *
+ * @param templateSpec
+ * @param data
  */
 export const generator = (
   templateSpec: string,
@@ -22,30 +23,51 @@ export const generator = (
 }
 
 /**
- * 
- * @param actions 
- * @param data 
- * @param templatePath 
+ *
+ * @param actions
+ * @param data
+ * @param templatePath
  */
 export const generate = async (
   actions: ActionGenerate[],
   data: Record<string, unknown>,
   templatePath: string
 ) => {
-  const outFilesToWrite = (
-    await Promise.all(
-      actions.map((action) => {
-        return doGenerate(action, templatePath, data)
-      })
-    )
-  ).filter((obj) => obj.canWriteOutfile)
+  const outFilesToWrite = await Promise.all(
+    actions.map((action) => {
+      return prepareFiles(action, templatePath, data)
+    })
+  )
 
-  outFilesToWrite.map((file) => {
+  const overWriteQuestions = outFilesToWrite
+    .map((f, index) => ({
+      type: "confirm",
+      name: `q${index}`,
+      message: `Overwrite the file ${f.outputFilePath}`,
+      skip: !f.fileExists,
+      default: true
+    }))
+
+  const answers = await prompt(overWriteQuestions)
+
+  console.dir(answers)
+
+  const filesToWrite = outFilesToWrite.filter(
+    (f) => overWriteQuestions.findIndex((q) => q.name === f.outputFilePath) >= 0
+  )
+
+  console.dir(filesToWrite)
+
+  const spinner = ora(`Generating files`).start()
+
+  filesToWrite.map((file) => {
+    ora(`file ${file.outputFilePath}`)
     writeFile(file.outputFilePath, file.outFileContent)
   })
+  spinner.stop()
 }
 
-const doGenerate = async (
+const prepareFiles = async (
   action: ActionGenerate,
   templatePath: string,
   data: Record<string, unknown>
@@ -61,30 +83,15 @@ const doGenerate = async (
   const outFileContent = generator(templateContent, data)
   const fileExists = fs.pathExistsSync(outputFilePath)
 
-  const question = {
-    type: "confirm",
-    name: "overwrite",
-    message: `Overwrite the file ${outputFilePath}`,
-    default: true
-  }
-
-  let canWriteOutfile = !fileExists
-  if (fileExists) {
-    const response: { overwrite: true } = await prompt([question])
-    if (response.overwrite) {
-      canWriteOutfile = true
-    }
-  }
-
   return {
     outputFilePath: outputFilePath,
     outFileContent: outFileContent,
-    canWriteOutfile: canWriteOutfile
+    fileExists: fileExists
   }
 }
 
 /**
- * 
+ *
  * @param filePath path of the file
  * @param content content to write
  */

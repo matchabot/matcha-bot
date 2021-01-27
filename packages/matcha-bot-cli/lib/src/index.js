@@ -36,6 +36,7 @@ const registerCommands = (commands) => utils_1.getCommands(commands).map((comman
             // generate files
             const genActions = command.actions;
             const templateDir = (_a = command.templateDir) !== null && _a !== void 0 ? _a : path_1.default.join(process.cwd(), "./templates");
+            console.log("\r\n🍵 Generate files:\r\n");
             await generator_1.generate(genActions, argValues, templateDir);
         });
         return cmd;
