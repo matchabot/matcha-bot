@@ -1,6 +1,6 @@
 {
   "name": "matchabot",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "license": "MIT",
   "dependencies": {
     "commander": "^7.0.0",
@@ -50,7 +50,7 @@
   "public": "true",
   "scripts": {
     "dev": "ts-node ./src/index.ts",
-    "publish": "npm publish",
+    "publish": "",
     "build": "webpack",
     "start": "./bin/cmd"
   },
