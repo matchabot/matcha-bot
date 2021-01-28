@@ -5,13 +5,16 @@ import { program } from "commander"
 import { version } from "./version"
 
 import { printBanner } from "./banner"
-import { getConfiguration } from "./config-reader"
+import { getConfiguration } from "./config/config-reader"
 
-import { registerCommands } from "./register-commands"
-import { listCommands } from "./list-command"
-import { initCommand } from "./init-command"
-import { registerPrompts } from "./register-prompts"
+import { registerCommands } from "./commands/register-commands"
+import { listCommands } from "./commands/list-command"
+import { initCommand } from "./commands/init-command"
+import { registerPrompts } from "./commands/register-prompts"
 
+/**
+ * Entry point
+ */
 export const run = async () => {
   // print banner
   printBanner("Matcha Bot")
@@ -36,5 +39,5 @@ export const run = async () => {
 
   program.parse(process.argv)
 
-  console.log("\r\n🍵 Be happy drink tea.\r\n")
+//  console.log("\r\n🍵 Be happy drink tea ... matcha tea ... .\r\n")
 }

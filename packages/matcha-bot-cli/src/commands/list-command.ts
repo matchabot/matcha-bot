@@ -1,5 +1,5 @@
 import { getCommands, askCommandArgs, getArgs } from "./commands-util"
-import { Commands } from "./model"
+import { Commands } from "../model"
 
 /**
  *

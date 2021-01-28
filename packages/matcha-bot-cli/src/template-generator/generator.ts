@@ -1,5 +1,5 @@
 import Handlebars from "handlebars"
-import { ActionGenerate } from "./model"
+import { ActionGenerate } from "../model"
 import fs from "fs-extra"
 import path from "path"
 import { registerHandlebarsHelper } from "./register-handlebars-helper"

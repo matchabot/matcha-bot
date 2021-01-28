@@ -1,5 +1,5 @@
 import path from "path"
-import { copyFolderSync } from "./file-utils"
+import { copyFolderSync } from "../utils/file-utils"
 /**
  * Create initial .matchabot directory with example of commands
  */

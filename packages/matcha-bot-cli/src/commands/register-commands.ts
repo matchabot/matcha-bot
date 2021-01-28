@@ -1,6 +1,6 @@
-import { generate } from "./generator"
+import { generate } from "../template-generator/generator"
 import { getCommands, askCommandArgs, getArgs } from "./commands-util"
-import { Commands } from "./model"
+import { Commands } from "../model"
 import { program } from "commander"
 import path from "path"
 

@@ -1,4 +1,4 @@
-import { Configuration, Command, Commands } from "./model"
+import { Configuration, Command, Commands } from "../model"
 import fg from "fast-glob"
 import path from "path"
 import fs from "fs-extra"

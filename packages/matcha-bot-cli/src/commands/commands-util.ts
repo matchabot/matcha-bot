@@ -1,4 +1,4 @@
-import { Commands, Command, Argument, ArgumentType } from "./model"
+import { Commands, Command, Argument, ArgumentType } from "../model"
 import { prompt } from "inquirer"
 
 const getInputType = (inputType: ArgumentType) => {
