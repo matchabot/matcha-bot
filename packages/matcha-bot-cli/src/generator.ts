@@ -4,7 +4,6 @@ import fs from "fs-extra"
 import path from "path"
 import { registerHelper } from "./register-helper"
 import { prompt } from "inquirer"
-import ora from "ora"
 
 registerHelper()
 
@@ -39,32 +38,38 @@ export const generate = async (
     })
   )
 
-  const overWriteQuestions = outFilesToWrite
+  const outFilesToWriteNoExisting = outFilesToWrite.filter((f) => !f.fileExists)
+  const outFilesToWriteExisting = outFilesToWrite.filter((f) => f.fileExists)
+
+  const overWriteFileAnswers = outFilesToWriteExisting.map((f, index) => ({
+    type: "confirm",
+    name: `q${index}`,
+    message: `Overwrite the file ${f.outputFilePath}`,
+    default: true
+  }))
+
+  const answers = await prompt(overWriteFileAnswers)
+
+  const overWriteFileResult = outFilesToWriteExisting
     .map((f, index) => ({
-      type: "confirm",
-      name: `q${index}`,
-      message: `Overwrite the file ${f.outputFilePath}`,
-      skip: !f.fileExists,
-      default: true
+      ...f,
+      overwrite: answers[`q${index}`]
     }))
+    .filter((f) => f.overwrite)
+    .map(({ overwrite, ...other }) => ({ ...other }))
 
-  const answers = await prompt(overWriteQuestions)
+  const finalFilesToWrite = [
+    ...outFilesToWriteNoExisting,
+    ...overWriteFileResult
+  ]
 
-  console.dir(answers)
-
-  const filesToWrite = outFilesToWrite.filter(
-    (f) => overWriteQuestions.findIndex((q) => q.name === f.outputFilePath) >= 0
-  )
-
-  console.dir(filesToWrite)
-
-  const spinner = ora(`Generating files`).start()
-
-  filesToWrite.map((file) => {
-    ora(`file ${file.outputFilePath}`)
+  console.log(`\r\nGenerating files:\r\n`)
+  finalFilesToWrite.map((file) => {
+    console.log(` ✅ ${file.outputFilePath}`)
     writeFile(file.outputFilePath, file.outFileContent)
   })
-  spinner.stop()
+
+  console.log("\r\n")
 }
 
 const prepareFiles = async (
