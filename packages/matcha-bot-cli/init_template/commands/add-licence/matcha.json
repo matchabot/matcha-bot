@@ -4,14 +4,17 @@
   "args": [
     {
       "name": "CopyRightsHolder",
+      "alias": "c",
       "type": "string"
     },
     {
       "name": "ProgramDescription",
+      "alias": "p",
       "type": "string"
     },
     {
       "name": "LicenceType",
+      "alias": "t",
       "type": "list",
       "choices": [
         { "name": "MIT License", "value": "mit" },

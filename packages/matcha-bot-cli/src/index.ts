@@ -7,7 +7,8 @@ import { version } from "./version"
 import { printBanner } from "./banner"
 import { getConfiguration } from "./config-reader"
 
-import { listCommands, registerCommands } from "./commands"
+import { registerCommands } from "./register-commands"
+import { listCommands } from "./list-command"
 import { initCommand } from "./init-command"
 import { registerPrompts } from "./register-prompts"
 
@@ -30,9 +31,10 @@ export const run = async () => {
     // Register a command that lists all availables commands
     .command("list")
     .action(() => listCommands(config.commands))
-    // Register init command => copy a starter directory called .matchabot
-    .command("init")
-    .action(initCommand)
+  // Register init command => copy a starter directory called .matchabot
+  program.command("init").action(initCommand)
 
   program.parse(process.argv)
+
+  console.log("\r\n🍵 Be happy drink tea.\r\n")
 }

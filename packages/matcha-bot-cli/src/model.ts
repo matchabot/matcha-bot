@@ -8,6 +8,7 @@ export interface IChoiceValue {
 export type Argument = {
   type: ArgumentType
   name: string
+  alias?: string
   description?: string
   default: unknown
   choices?: (string | IChoiceValue)[]
