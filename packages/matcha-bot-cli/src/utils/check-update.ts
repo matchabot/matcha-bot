@@ -1,12 +1,9 @@
-import path from "path"
+import updateNotifier from "update-notifier"
+import Package from "../../package.json"
 
 export const checkUpdate = () => {
-  const updateNotifier = require("update-notifier")
-  const pathPackageJson = path.join(__dirname, "../../package.json")
-  const pkg = require(pathPackageJson)
-
   // Checks for available update and returns an instance
-  const notifier = updateNotifier({ pkg })
+  const notifier = updateNotifier({ pkg: Package })
 
   // Notify using the built-in convenience method
   notifier.notify()

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Configuration } from "./model"
 import { program } from "commander"
 import { version } from "./version"
@@ -25,7 +23,7 @@ export const run = async () => {
   const config: Configuration = await getConfiguration()
 
   // check update
-  checkUpdate()
+//  checkUpdate()
 
   // Register prompt types
   registerPrompts()
@@ -46,3 +44,9 @@ export const run = async () => {
 
   //  console.log("\r\n🍵 Be happy drink tea ... matcha tea ... .\r\n")
 }
+
+const runX = () => {
+  console.log("Gloubi boulag!!")
+}
+
+run()

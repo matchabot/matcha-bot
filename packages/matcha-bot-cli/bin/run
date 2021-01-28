@@ -9,10 +9,4 @@ if (dev) {
   require("ts-node").register({ project })
 }
 
-const { run } = require(`../${dev ? "src" : "lib"}`)
-
-try {
-  run()
-} catch (e) {
-  console.log(e)
-}
+const run = require(`../${dev ? "src" : "lib"}`)
