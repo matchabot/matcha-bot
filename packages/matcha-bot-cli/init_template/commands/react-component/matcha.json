@@ -1,0 +1,35 @@
+{
+  "name": "react-component",
+  "description": "Generate a Styled React Component, and an associated story",
+  "args": [
+    {
+      "name": "ComponentName",
+      "type": "string"
+    },
+    {
+      "name": "TargetDirectory",
+      "type": "string",
+      "default": "Component"
+    }
+  ],
+  "actions": [
+    {
+      "type": "template",
+      "name": "Generate ReactComponent",
+      "outFile": "{{TargetDirectory}}/{{kebabCase ComponentName}}/index.tsx",
+      "sourceTemplate": "component.tsx.hbs"
+    },
+    {
+      "type": "template",
+      "name": "Generate Style for Component",
+      "outFile": "{{TargetDirectory}}/{{kebabCase ComponentName}}/style.tsx",
+      "sourceTemplate": "style.tsx.hbs"
+    },
+    {
+      "type": "template",
+      "name": "Generate Story",
+      "outFile": "{{TargetDirectory}}/{{kebabCase ComponentName}}/{{kebabCase ComponentName}}.stories.tsx",
+      "sourceTemplate": "stories.tsx.hbs"
+    }
+  ]
+}

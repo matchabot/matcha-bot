@@ -2,17 +2,17 @@ import Handlebars from "handlebars"
 import { ActionGenerate } from "./model"
 import fs from "fs-extra"
 import path from "path"
-import { registerHelper } from "./register-helper"
+import { registerHandlebarsHelper } from "./register-handlebars-helper"
 import { prompt } from "inquirer"
 
-registerHelper()
+registerHandlebarsHelper()
 
 /**
  *
  * @param templateSpec
  * @param data
  */
-export const generator = (
+export const executeTemplate = (
   templateSpec: string,
   data: Record<string, unknown>
 ) => {
@@ -77,15 +77,24 @@ const prepareFiles = async (
   templatePath: string,
   data: Record<string, unknown>
 ) => {
-  const sourceTemplateFilePath = path.join(templatePath, action.sourceTemplate)
-  const destTemplate = generator(action.outFile, data)
+  // We evaluate the templat with variables in data
+  const sourceTemplate = executeTemplate(action.sourceTemplate, data)
+  const destTemplate = executeTemplate(action.outFile, data)
+
+  // Normalize directory path
+  const sourceTemplateFilePath = path.join(templatePath, sourceTemplate)
   const outputFilePath = path.join(process.cwd(), destTemplate)
+
+  // Read source template
   const templateContent = fs.readFileSync(sourceTemplateFilePath, {
     encoding: "utf8",
     flag: "r"
   })
 
-  const outFileContent = generator(templateContent, data)
+  // Execute template
+  const outFileContent = executeTemplate(templateContent, data)
+
+  // Check if destination outputFilePath exists
   const fileExists = fs.pathExistsSync(outputFilePath)
 
   return {

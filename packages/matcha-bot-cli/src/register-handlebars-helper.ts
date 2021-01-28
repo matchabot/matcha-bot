@@ -2,7 +2,7 @@ import Handlebars from "handlebars"
 import _ from "lodash"
 import moment from "moment"
 
-export const registerHelper = () => {
+export const registerHandlebarsHelper = () => {
   Handlebars.registerHelper("camelCase", function (s) {
     return _.camelCase(s)
   })
@@ -14,6 +14,11 @@ export const registerHelper = () => {
   Handlebars.registerHelper("snakeCase", function (s) {
     return _.snakeCase(s)
   })
+
+  Handlebars.registerHelper("kebabCase", function (s) {
+    return _.kebabCase(s)
+  })
+
 
   Handlebars.registerHelper("toLowerCase", function (s) {
     return s.toLowerCase()

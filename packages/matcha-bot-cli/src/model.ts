@@ -1,9 +1,16 @@
-export type ArgumentType = string | number
+export type ArgumentType = "string" | "number" | "path" | "list"
+
+export interface IChoiceValue {
+  name: string
+  value: unknown
+}
 
 export type Argument = {
   type: ArgumentType
   name: string
   description?: string
+  default: unknown
+  choices?: (string | IChoiceValue)[]
 }
 
 /**

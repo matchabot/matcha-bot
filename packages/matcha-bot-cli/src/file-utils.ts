@@ -1,6 +1,9 @@
 import path from "path"
 import { existsSync, mkdirSync, copyFileSync, readdirSync, lstatSync } from "fs"
 
+/*
+  Copy folder from to a destination
+ */
 export const copyFolderSync = (from: string, to: string) => {
   if (!existsSync(to)) {
     mkdirSync(to)

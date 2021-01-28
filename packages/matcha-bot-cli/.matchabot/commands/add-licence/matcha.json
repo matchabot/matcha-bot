@@ -1,0 +1,33 @@
+{
+  "name": "add-licence",
+  "description": "Add a licence file",
+  "args": [
+    {
+      "name": "CopyRightsHolder",
+      "type": "string"
+    },
+    {
+      "name": "ProgramDescription",
+      "type": "string"
+    },
+    {
+      "name": "LicenceType",
+      "type": "list",
+      "choices": [
+        { "name": "MIT License", "value": "mit" },
+        { "name": "BSD License", "value": "bsd" },
+        { "name": "Apache License, Version 2.0", "value": "apache2" },
+        { "name": "GNU General Public License version 3", "value": "gnu3" }
+      ],
+      "default": "MIT"
+    }
+  ],
+  "actions": [
+    {
+      "type": "template",
+      "name": "Generate Licence",
+      "outFile": "LICENCE.md",
+      "sourceTemplate": "{{toLowerCase LicenceType}}.md.hbs"
+    }
+  ]
+}

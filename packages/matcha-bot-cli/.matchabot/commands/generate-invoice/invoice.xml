@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<invoice>
-  <number>{{invoiceNumber}}</number>
-  <address>{{address}}</address>
-  <company>{{company}}</company>
-</invoice>

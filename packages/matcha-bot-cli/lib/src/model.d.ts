@@ -1,4 +1,4 @@
-export declare type ArgumentType = string | number;
+export declare type ArgumentType = "string" | "number" | "path";
 export declare type Argument = {
     type: ArgumentType;
     name: string;

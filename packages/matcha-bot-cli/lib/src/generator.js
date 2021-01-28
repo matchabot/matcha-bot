@@ -29,19 +29,32 @@ const generate = async (actions, data, templatePath) => {
     const outFilesToWrite = await Promise.all(actions.map((action) => {
         return prepareFiles(action, templatePath, data);
     }));
-    const overWriteQuestions = outFilesToWrite
-        .filter((f) => f.fileExists)
-        .map((f) => ({
+    const outFilesToWriteNoExisting = outFilesToWrite.filter((f) => !f.fileExists);
+    const outFilesToWriteExisting = outFilesToWrite.filter((f) => f.fileExists);
+    const overWriteFileAnswers = outFilesToWriteExisting.map((f, index) => ({
         type: "confirm",
-        name: f.outputFilePath,
+        name: `q${index}`,
         message: `Overwrite the file ${f.outputFilePath}`,
         default: true
     }));
-    const answers = await inquirer_1.prompt(overWriteQuestions);
-    const filesToWrite = outFilesToWrite.filter((f) => overWriteQuestions.findIndex((q) => q.name === f.outputFilePath) >= 0);
-    filesToWrite.map((file) => {
+    const answers = await inquirer_1.prompt(overWriteFileAnswers);
+    const overWriteFileResult = outFilesToWriteExisting
+        .map((f, index) => (Object.assign(Object.assign({}, f), { overwrite: answers[`q${index}`] })))
+        .filter((f) => f.overwrite)
+        .map((_a) => {
+        var { overwrite } = _a, other = tslib_1.__rest(_a, ["overwrite"]);
+        return (Object.assign({}, other));
+    });
+    const finalFilesToWrite = [
+        ...outFilesToWriteNoExisting,
+        ...overWriteFileResult
+    ];
+    console.log(`\r\nGenerating files:\r\n`);
+    finalFilesToWrite.map((file) => {
+        console.log(` ✅ ${file.outputFilePath}`);
         writeFile(file.outputFilePath, file.outFileContent);
     });
+    console.log("\r\n");
 };
 exports.generate = generate;
 const prepareFiles = async (action, templatePath, data) => {
