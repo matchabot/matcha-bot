@@ -1,24 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generate = exports.generator = void 0;
+exports.generate = exports.executeTemplate = void 0;
 const tslib_1 = require("tslib");
 const handlebars_1 = tslib_1.__importDefault(require("handlebars"));
 const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
 const path_1 = tslib_1.__importDefault(require("path"));
-const register_helper_1 = require("./register-helper");
+const register_handlebars_helper_1 = require("./register-handlebars-helper");
 const inquirer_1 = require("inquirer");
-register_helper_1.registerHelper();
+register_handlebars_helper_1.registerHandlebarsHelper();
 /**
  *
  * @param templateSpec
  * @param data
  */
-const generator = (templateSpec, data) => {
+const executeTemplate = (templateSpec, data) => {
     const template = handlebars_1.default.compile(templateSpec);
     const output = template(data);
     return output;
 };
-exports.generator = generator;
+exports.executeTemplate = executeTemplate;
 /**
  *
  * @param actions
@@ -58,14 +58,20 @@ const generate = async (actions, data, templatePath) => {
 };
 exports.generate = generate;
 const prepareFiles = async (action, templatePath, data) => {
-    const sourceTemplateFilePath = path_1.default.join(templatePath, action.sourceTemplate);
-    const destTemplate = exports.generator(action.outFile, data);
+    // We evaluate the templat with variables in data
+    const sourceTemplate = exports.executeTemplate(action.sourceTemplate, data);
+    const destTemplate = exports.executeTemplate(action.outFile, data);
+    // Normalize directory path
+    const sourceTemplateFilePath = path_1.default.join(templatePath, sourceTemplate);
     const outputFilePath = path_1.default.join(process.cwd(), destTemplate);
+    // Read source template
     const templateContent = fs_extra_1.default.readFileSync(sourceTemplateFilePath, {
         encoding: "utf8",
         flag: "r"
     });
-    const outFileContent = exports.generator(templateContent, data);
+    // Execute template
+    const outFileContent = exports.executeTemplate(templateContent, data);
+    // Check if destination outputFilePath exists
     const fileExists = fs_extra_1.default.pathExistsSync(outputFilePath);
     return {
         outputFilePath: outputFilePath,

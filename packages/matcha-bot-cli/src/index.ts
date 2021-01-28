@@ -12,6 +12,8 @@ import { listCommands } from "./commands/list-command"
 import { initCommand } from "./commands/init-command"
 import { registerPrompts } from "./commands/register-prompts"
 
+import { checkUpdate } from "./utils/check-update"
+
 /**
  * Entry point
  */
@@ -21,6 +23,9 @@ export const run = async () => {
 
   // read configuration
   const config: Configuration = await getConfiguration()
+
+  // check update
+  checkUpdate()
 
   // Register prompt types
   registerPrompts()
@@ -39,5 +44,5 @@ export const run = async () => {
 
   program.parse(process.argv)
 
-//  console.log("\r\n🍵 Be happy drink tea ... matcha tea ... .\r\n")
+  //  console.log("\r\n🍵 Be happy drink tea ... matcha tea ... .\r\n")
 }

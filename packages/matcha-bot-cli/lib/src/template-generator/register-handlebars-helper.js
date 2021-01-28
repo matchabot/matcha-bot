@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerHelper = void 0;
+exports.registerHandlebarsHelper = void 0;
 const tslib_1 = require("tslib");
 const handlebars_1 = tslib_1.__importDefault(require("handlebars"));
 const lodash_1 = tslib_1.__importDefault(require("lodash"));
 const moment_1 = tslib_1.__importDefault(require("moment"));
-const registerHelper = () => {
+const registerHandlebarsHelper = () => {
     handlebars_1.default.registerHelper("camelCase", function (s) {
         return lodash_1.default.camelCase(s);
     });
@@ -14,6 +14,9 @@ const registerHelper = () => {
     });
     handlebars_1.default.registerHelper("snakeCase", function (s) {
         return lodash_1.default.snakeCase(s);
+    });
+    handlebars_1.default.registerHelper("kebabCase", function (s) {
+        return lodash_1.default.kebabCase(s);
     });
     handlebars_1.default.registerHelper("toLowerCase", function (s) {
         return s.toLowerCase();
@@ -28,4 +31,4 @@ const registerHelper = () => {
         return moment_1.default();
     });
 };
-exports.registerHelper = registerHelper;
+exports.registerHandlebarsHelper = registerHandlebarsHelper;

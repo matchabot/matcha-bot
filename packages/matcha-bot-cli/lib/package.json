@@ -1,5 +1,5 @@
 {
-    "name": "matcha-bot",
+    "name": "matchabot",
     "version": "0.0.1",
     "license": "MIT",
     "dependencies": {
@@ -17,7 +17,8 @@
         "lodash": "^4.17.20",
         "moment": "^2.29.1",
         "ora": "^5.3.0",
-        "tslib": "^2.1.0"
+        "tslib": "^2.1.0",
+        "update-notifier": "^5.0.1"
     },
     "devDependencies": {
         "@types/commander": "^2.12.2",
@@ -30,6 +31,7 @@
         "@types/lodash": "^4.14.168",
         "@types/node": "^14.14.22",
         "@types/ora": "^3.2.0",
+        "@types/update-notifier": "^5.0.0",
         "gradient-string": "^1.2.0",
         "ts-node": "^9.1.1",
         "typescript": "^4.1.3"

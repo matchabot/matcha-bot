@@ -2,6 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.askCommandArgs = exports.getCommandNames = exports.getArgs = exports.getCommands = void 0;
 const inquirer_1 = require("inquirer");
+const getInputType = (inputType) => {
+    switch (inputType) {
+        case "string":
+            return "input";
+        case "number":
+            return "number";
+        case "path":
+            return "path";
+        case "list":
+            return "list";
+        default:
+            return "input";
+    }
+};
 const getCommands = (commands) => {
     return Object.keys(commands).map((k) => commands[k]);
 };
@@ -17,9 +31,11 @@ const askCommandArgs = async (args) => {
     const questions = args.map((arg) => {
         var _a;
         return ({
-            type: "input",
+            type: getInputType(arg.type),
             name: arg.name,
-            message: (_a = arg.description) !== null && _a !== void 0 ? _a : `${arg.name}`
+            message: (_a = arg.description) !== null && _a !== void 0 ? _a : `${arg.name}`,
+            default: arg.default,
+            choices: arg.choices
         });
     });
     const responses = await inquirer_1.prompt(questions);

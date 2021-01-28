@@ -1,8 +1,15 @@
-export declare type ArgumentType = "string" | "number" | "path";
+export declare type ArgumentType = "string" | "number" | "path" | "list";
+export interface IChoiceValue {
+    name: string;
+    value: unknown;
+}
 export declare type Argument = {
     type: ArgumentType;
     name: string;
+    alias?: string;
     description?: string;
+    default: unknown;
+    choices?: (string | IChoiceValue)[];
 };
 /**
  * A command

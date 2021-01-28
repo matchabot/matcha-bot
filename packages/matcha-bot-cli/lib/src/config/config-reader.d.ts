@@ -1,4 +1,4 @@
-import { Configuration } from "./model";
+import { Configuration } from "../model";
 /**
  * Search configuration files matcha.json inside ./.matchabot/** directory
  */

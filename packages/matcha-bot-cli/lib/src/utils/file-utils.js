@@ -4,6 +4,9 @@ exports.findFirstExisting = exports.copyFolderSync = void 0;
 const tslib_1 = require("tslib");
 const path_1 = tslib_1.__importDefault(require("path"));
 const fs_1 = require("fs");
+/*
+  Copy folder from to a destination
+ */
 const copyFolderSync = (from, to) => {
     if (!fs_1.existsSync(to)) {
         fs_1.mkdirSync(to);

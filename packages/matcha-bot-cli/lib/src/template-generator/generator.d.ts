@@ -1,10 +1,10 @@
-import { ActionGenerate } from "./model";
+import { ActionGenerate } from "../model";
 /**
  *
  * @param templateSpec
  * @param data
  */
-export declare const generator: (templateSpec: string, data: Record<string, unknown>) => string;
+export declare const executeTemplate: (templateSpec: string, data: Record<string, unknown>) => string;
 /**
  *
  * @param actions
