@@ -17,5 +17,5 @@ export const initCommand = () => {
   const dest = path.join(process.cwd(), "./.matchabot")
   copyFolderSync(templateDir, dest)
 
-  console.log(`\r\n ✅ Configuration fodler ${dest} created\r\n`)
+  console.log(`\r\n ✅ Configuration folder ${dest} created\r\n`)
 }

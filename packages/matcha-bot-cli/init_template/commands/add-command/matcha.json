@@ -1,0 +1,37 @@
+{
+  "name": "add-command",
+  "description": "add a new command to the .matchabot directory",
+  "version": "1.0.0",
+  "args": [
+    {
+      "name": "CommandName",
+      "alias": "n",
+      "type": "string"
+    },
+    {
+      "name": "Description",
+      "alias": "d",
+      "type": "string"
+    },
+    {
+      "name": "Version",
+      "alias": "v",
+      "type": "string",
+      "default": "1.0.0"
+    }
+  ],
+  "actions": [
+    {
+      "type": "template",
+      "name": "Generate a matcha.json file",
+      "outFile": "./.matchabot/{{kebabCase CommandName}}/matcha.json",
+      "sourceTemplate": "matcha.json.hbs"
+    },
+    {
+      "type": "copy",
+      "name": "Generate a text file",
+      "outFile": "./.matchabot/{{kebabCase CommandName}}/text.txt.hbs",
+      "sourceTemplate": "text.txt.hbs"
+    }
+  ]
+}

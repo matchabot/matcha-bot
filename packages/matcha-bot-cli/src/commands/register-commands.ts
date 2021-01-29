@@ -2,7 +2,10 @@ import { generate } from "../template-generator/generator"
 import { getCommands, askCommandArgs, getArgs } from "./commands-util"
 import { Commands } from "../model"
 import { program } from "commander"
+import { getSystemVariables } from "../template-generator/add-system-variables"
 import path from "path"
+
+const log = console.log
 
 /**
  * Register a list of commands
@@ -46,8 +49,11 @@ export const registerCommands = (commands: Commands) =>
         const templateDir =
           command.templateDir ?? path.join(process.cwd(), "./templates")
 
-        console.log("\r\n🍵 Generating files:\r\n")
-        await generate(genActions, argValues, templateDir, force, debugMode)
+        // Merge with system variables (such as {___currentDateTime,__generatorVersion})
+        const data = { ...argValues, ...getSystemVariables() }
+
+        log("\r\n🍵 Generating files:\r\n")
+        await generate(genActions, data, templateDir, force, debugMode)
       })
       return cmd
     })

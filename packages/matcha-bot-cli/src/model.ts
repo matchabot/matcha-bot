@@ -23,9 +23,7 @@ export type Action = {
   args?: Argument[]
 }
 
-/**
- */
-export type ActionGenerate = Action & {
+export type ActionTemplate = {
   type: "template"
   /**
    * The source file template
@@ -36,6 +34,22 @@ export type ActionGenerate = Action & {
    */
   outFile: string
 }
+
+export type ActionCopy = {
+  type: "copy"
+  /**
+   * The source file template
+   */
+  sourceTemplate: string
+  /**
+   * The fileName of the genated file
+   */
+  outFile: string
+}
+
+/**
+ */
+export type ActionGenerate = ActionTemplate | ActionCopy
 
 export type Command = {
   name: string

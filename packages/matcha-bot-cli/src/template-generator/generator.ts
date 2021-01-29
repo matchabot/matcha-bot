@@ -65,6 +65,7 @@ const prepareFiles = async (
   data: Record<string, unknown>
 ) => {
   // We evaluate the templat with variables in data
+
   const sourceTemplate = executeTemplate(action.sourceTemplate, data)
   const destTemplate = executeTemplate(action.outFile, data)
 
@@ -79,7 +80,10 @@ const prepareFiles = async (
   })
 
   // Execute template
-  const outFileContent = executeTemplate(templateContent, data)
+  const outFileContent =
+    action.type === "template"
+      ? executeTemplate(templateContent, data)
+      : templateContent
 
   // Check if destination outputFilePath exists
   const fileExists = fs.pathExistsSync(outputFilePath)
