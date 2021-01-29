@@ -1,6 +1,6 @@
 {
   "name": "matchabot",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "license": "MIT",
   "dependencies": {
     "commander": "^7.0.0",
