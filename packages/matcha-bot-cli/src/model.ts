@@ -40,6 +40,7 @@ export type ActionGenerate = Action & {
 export type Command = {
   name: string
   description?: string
+  version?: string
   args: Argument[]
   actions: ActionGenerate[]
   templateDir?: string

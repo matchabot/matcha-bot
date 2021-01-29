@@ -36,9 +36,15 @@ export const run = async () => {
     .version(version, "-v,--version", "output the current version")
     // Register a command that lists all availables commands
     .command("list")
+    .description("list all available commands")
     .action(() => listCommands(config.commands))
   // Register init command => copy a starter directory called .matchabot
-  program.command("init").action(initCommand)
+  program
+    .command("init")
+    .description(
+      "create a local template directory '.matchabot' in your current directory with a set of starter templates"
+    )
+    .action(initCommand)
 
   program.parse(process.argv)
 }

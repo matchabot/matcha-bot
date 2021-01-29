@@ -1,4 +1,4 @@
-import { getCommands, askCommandArgs, getArgs } from "./commands-util"
+import { getCommands } from "./commands-util"
 import { Commands } from "../model"
 
 /**
@@ -10,11 +10,22 @@ import { Commands } from "../model"
 export const listCommands = (commands: Commands) => {
   const listCommands = getCommands(commands)
 
-  listCommands.map((command, index) => {
-    console.log(
-      `[${index + 1}/${listCommands.length}]: 👉 ${command.name} ${
-        command.description ? ": " + command.description : ""
-      }`
-    )
-  })
+  const dir = process.cwd()
+
+  const simplifyPath = (path?: string) => {
+    if (!path) return ""
+    if (path.startsWith(dir)) {
+      return path.substring(dir.length)
+    }
+    return path
+  }
+
+  const commandTable = listCommands.map((command, index) => ({
+    name: command.name,
+    description: command.description ?? "",
+    version: command.version ?? "",
+    location: simplifyPath(command.templateDir)
+  }))
+
+  console.table(commandTable)
 }

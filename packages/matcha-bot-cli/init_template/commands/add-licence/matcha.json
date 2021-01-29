@@ -1,6 +1,7 @@
 {
   "name": "add-licence",
-  "description": "Add a licence file",
+  "description": "add a licence file to your project",
+  "version": "1.0.0",
   "args": [
     {
       "name": "CopyRightsHolder",

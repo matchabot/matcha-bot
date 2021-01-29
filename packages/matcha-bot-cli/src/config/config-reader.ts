@@ -27,6 +27,8 @@ export const getConfiguration = async (): Promise<Configuration> => {
 
       const cmd: Command = {
         name: cmdConfig.name,
+        description: cmdConfig.description,
+        version: cmdConfig.version,
         templateDir: configPath,
         args: cmdConfig.args,
         actions: cmdConfig.actions

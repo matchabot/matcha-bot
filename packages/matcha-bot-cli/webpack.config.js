@@ -1,4 +1,6 @@
-var path = require("path")
+const path = require("path")
+const CopyPlugin = require("copy-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
 module.exports = {
   entry: "./src/index.ts",
@@ -11,6 +13,18 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".js"] //resolve all the modules other than index.ts,
+  },
+  plugins: [
+    new CleanWebpackPlugin()
+    /*    new CopyPlugin({
+      patterns: [{ from: "./init_template/", to: "./init_template" }]
+    })*/
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      // ...plugins
+    ]
   },
   module: {
     rules: [
@@ -36,7 +50,7 @@ module.exports = {
         loader: "file-loader",
         options: {
           outputPath: "../fonts",
-          name: '[name].[ext]',
+          name: "[name].[ext]"
         }
       }
     ]
