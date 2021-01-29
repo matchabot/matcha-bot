@@ -1,13 +1,12 @@
 {
   "name": "matchabot",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "license": "MIT",
   "dependencies": {
     "commander": "^7.0.0",
     "debug": "^4.3.1",
     "fast-glob": "^3.2.5",
     "figlet": "^1.5.0",
-    "file-loader": "^6.2.0",
     "fs-extra": "^9.1.0",
     "gradient-string": "^1.2.0",
     "handlebars": "^4.7.6",
@@ -41,7 +40,10 @@
     "@types/update-notifier": "^5.0.0",
     "@types/update-notifier-webpack": "npm:@types/update-notifier",
     "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^7.0.0",
     "figlet": "^1.5.0",
+    "file-loader": "^6.2.0",
     "gradient-string": "^1.2.0",
     "source-map-loader": "^2.0.0",
     "ts-loader": "^8.0.14",
@@ -54,15 +56,14 @@
   "public": "true",
   "scripts": {
     "dev": "ts-node ./src/index.ts",
-    "publish": "",
+    "prepublishOnly": "webpack",
     "build": "webpack",
-    "start": "./bin/cmd"
+    "start": "./bin/run"
   },
   "files": [
     "/bin",
     "/lib",
-    "/fonts/Standard.flf",
-    "/init_template"
+    "/fonts/Standard.flf"
   ],
   "engines": {
     "node": ">=10.0.0"
