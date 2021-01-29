@@ -1,11 +1,13 @@
-import Handlebars from "handlebars"
-import { ActionGenerate } from "../model"
 import fs from "fs-extra"
 import path from "path"
+import Handlebars from "handlebars"
+import { ActionGenerate } from "../model"
 import { registerHelpers } from "./register-helper"
 import { localPath } from "../utils/file-utils"
+import { walkFolderWithTransformAction } from "../utils/file-utils"
 import { prompt } from "inquirer"
 import chalk from "chalk"
+import { transform } from "lodash"
 
 const log = console.log
 
@@ -39,11 +41,13 @@ export const generate = async (
   debugMode: boolean = false
 ) => {
   const write = debugMode ? writeFileDebug : writeFile
-  const outFilesToWrite = await Promise.all(
-    actions.map((action) => {
-      return prepareFiles(action, templatePath, data)
-    })
-  )
+  const outFilesToWrite = (
+    await Promise.all(
+      actions.map((action) => {
+        return prepareFiles(action, templatePath, data)
+      })
+    )
+  ).reduce((accumulator, current) => [...accumulator, ...current], [])
 
   // We don't ask to overwrite for debugMode and forceOverWriteFiles flag
   const finalFilesToWrite =
@@ -64,8 +68,28 @@ const prepareFiles = async (
   templatePath: string,
   data: Record<string, unknown>
 ) => {
-  // We evaluate the templat with variables in data
+  // Case 1 - copy directory action
+  if (action.type === "copy-directory") {
+    // We evaluate the template with variables in data
+    const sourceDirectory = executeTemplate(action.sourceDirectory, data)
+    const destinationDirectory = executeTemplate(
+      action.destinationDirectory,
+      data
+    )
+    // Normalize directory path
+    const sourceDirectoryPath = path.join(templatePath, sourceDirectory)
+    const outputFilePath = path.join(process.cwd(), destinationDirectory)
 
+    //   const transformAction = (content : string) => (conte)
+
+    //    walkFolderWithTransformAction(sourceDirectoryPath,,destinationDirectory,transform)
+
+    return []
+  }
+
+  // Case 2 or 3
+  // template or copy action
+  // We evaluate the template with variables in data
   const sourceTemplate = executeTemplate(action.sourceTemplate, data)
   const destTemplate = executeTemplate(action.outFile, data)
 
@@ -78,7 +102,6 @@ const prepareFiles = async (
     encoding: "utf8",
     flag: "r"
   })
-
   // Execute template
   const outFileContent =
     action.type === "template"
@@ -88,11 +111,13 @@ const prepareFiles = async (
   // Check if destination outputFilePath exists
   const fileExists = fs.pathExistsSync(outputFilePath)
 
-  return {
-    outputFilePath: outputFilePath,
-    outFileContent: outFileContent,
-    fileExists: fileExists
-  }
+  return [
+    {
+      outputFilePath: outputFilePath,
+      outFileContent: outFileContent,
+      fileExists: fileExists
+    }
+  ]
 }
 
 /**
