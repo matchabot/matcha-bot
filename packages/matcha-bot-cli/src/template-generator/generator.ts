@@ -43,7 +43,6 @@ export const generate = async (
     ? outFilesToWrite
     : await askFilesToOverwrite(outFilesToWrite)
 
-  console.log(`\r\nGenerating files:\r\n`)
   finalFilesToWrite.map((file) => {
     console.log(` ✅ ${file.outputFilePath}`)
     writeFile(file.outputFilePath, file.outFileContent)
