@@ -1,31 +1,34 @@
 import { getCommands } from "./commands-util"
+import { localPath } from "../utils/file-utils"
 import { Commands } from "../model"
 
 /**
  *
- * Display all commands
+ * Display all commands on the console
  *
  * @param commands
  */
 export const listCommands = (commands: Commands) => {
   const listCommands = getCommands(commands)
-
   const dir = process.cwd()
-
-  const simplifyPath = (path?: string) => {
-    if (!path) return ""
-    if (path.startsWith(dir)) {
-      return path.substring(dir.length)
-    }
-    return path
-  }
 
   const commandTable = listCommands.map((command, index) => ({
     name: command.name,
     description: command.description ?? "",
     version: command.version ?? "",
-    location: simplifyPath(command.templateDir)
+    location: localPath(command.templateDir, dir)
   }))
 
-  console.table(commandTable)
+  if (commandTable.length === 0) {
+    console.log(
+      `\r\n🍵 No command availale. 
+ 
+Try:\r\n
+$ matchabot -init 
+
+To create a template directory.\r\n`
+    )
+  } else {
+    console.table(commandTable)
+  }
 }

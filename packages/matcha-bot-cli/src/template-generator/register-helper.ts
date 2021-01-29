@@ -18,7 +18,7 @@ export const registerHelper = function (name: string, fn: HelperDelegate) {
   Handlebars.registerHelper(name, fn)
 }
 
-export const registerHandlebarsHelper = () => {
+export const registerHelpers = () => {
   registerHelper("camelCase", function (s) {
     return _.camelCase(s)
   })

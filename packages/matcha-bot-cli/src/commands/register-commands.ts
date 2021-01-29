@@ -11,7 +11,15 @@ import path from "path"
 export const registerCommands = (commands: Commands) =>
   getCommands(commands).map((command) => {
     const cmd = program.command(command.name)
-    cmd.option("-f,--force", "Force overwrite file if file already exists")
+
+    // Force option
+    cmd.option("--force", "force overwrite file if file already exists")
+    // Debug mode
+    cmd.option(
+      "--debug",
+      "execute the command in debug mode (no file generated)"
+    )
+
     command.args.map((args) => {
       const optionName = args.name
       const optionFlag = args.alias ?? args.name.toLocaleLowerCase().slice(0, 1)
@@ -21,16 +29,17 @@ export const registerCommands = (commands: Commands) =>
         // Find args not in command line
         const args = getArgs(command)
         const opts: Record<string, unknown> = cmd.opts()
-        const undefindedArgs = args.filter(
+        const undefinedArgs = args.filter(
           (arg) => !Object.keys(opts).includes(arg.name)
         )
         // Ask missing args
-        const resAskArgs = await askCommandArgs(undefindedArgs)
+        const resAskArgs = await askCommandArgs(undefinedArgs)
         // All commands arguments are completed
         const argValues = { ...opts, ...resAskArgs }
 
         // force
         const force = argValues.force === true
+        const debugMode = argValues.debug === true
 
         // generating files
         const genActions = command.actions
@@ -38,7 +47,7 @@ export const registerCommands = (commands: Commands) =>
           command.templateDir ?? path.join(process.cwd(), "./templates")
 
         console.log("\r\n🍵 Generating files:\r\n")
-        await generate(genActions, argValues, templateDir, force)
+        await generate(genActions, argValues, templateDir, force, debugMode)
       })
       return cmd
     })

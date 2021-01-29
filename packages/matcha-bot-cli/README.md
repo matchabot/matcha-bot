@@ -2,7 +2,7 @@
 
 ## Introduction
 
-MatchaBot template generator on steroids.
+Template generator on steroids.
 
 ### Features
 

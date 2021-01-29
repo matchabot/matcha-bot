@@ -22,3 +22,19 @@ export const findFirstExisting = (filePaths: ReadonlyArray<string>) => {
 
   return resultFile
 }
+
+/**
+ *
+ * Return the localPath from a full Path
+ *
+ * @param fullPath a fullPath
+ * @param currentDir the current directory
+ */
+export const localPath = (fullPath?: string, currentDir?: string) => {
+  const dir = currentDir ?? process.cwd()
+  if (!fullPath) return ""
+  if (fullPath.startsWith(dir)) {
+    return `.${fullPath.substring(dir.length)}`
+  }
+  return fullPath
+}

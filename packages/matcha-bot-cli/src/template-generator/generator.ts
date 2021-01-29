@@ -2,10 +2,14 @@ import Handlebars from "handlebars"
 import { ActionGenerate } from "../model"
 import fs from "fs-extra"
 import path from "path"
-import { registerHandlebarsHelper } from "./register-handlebars-helper"
+import { registerHelpers } from "./register-helper"
+import { localPath } from "../utils/file-utils"
 import { prompt } from "inquirer"
+import chalk from "chalk"
 
-registerHandlebarsHelper()
+const log = console.log
+
+registerHelpers()
 
 /**
  *
@@ -31,24 +35,28 @@ export const generate = async (
   actions: ActionGenerate[],
   data: Record<string, unknown>,
   templatePath: string,
-  forceOverwriteFiles: boolean = false
+  forceOverwriteFiles: boolean = false,
+  debugMode: boolean = false
 ) => {
+  const write = debugMode ? writeFileDebug : writeFile
   const outFilesToWrite = await Promise.all(
     actions.map((action) => {
       return prepareFiles(action, templatePath, data)
     })
   )
 
-  const finalFilesToWrite = forceOverwriteFiles
-    ? outFilesToWrite
-    : await askFilesToOverwrite(outFilesToWrite)
+  // We don't ask to overwrite for debugMode and forceOverWriteFiles flag
+  const finalFilesToWrite =
+    forceOverwriteFiles || debugMode
+      ? outFilesToWrite
+      : await askFilesToOverwrite(outFilesToWrite)
 
   finalFilesToWrite.map((file) => {
-    console.log(` ✅ ${file.outputFilePath}`)
-    writeFile(file.outputFilePath, file.outFileContent)
+    log(` ✅ ${file.outputFilePath}`)
+    write(file.outputFilePath, file.outFileContent)
   })
 
-  console.log("\r\n")
+  log("\r\n")
 }
 
 const prepareFiles = async (
@@ -84,7 +92,7 @@ const prepareFiles = async (
 }
 
 /**
- *
+ * Write file and content to a specified location.
  * @param filePath path of the file
  * @param content content to write
  */
@@ -93,6 +101,20 @@ const writeFile = (filePath: string, content: string) => {
   fs.ensureDirSync(dirPath)
   fs.writeFileSync(filePath, content)
   return true
+}
+
+/**
+ * Write output to the console for debugging
+ * @param filePath
+ * @param content
+ */
+const writeFileDebug = (filePath: string, content: string) => {
+  const file = localPath(filePath)
+  log("\r\n")
+  log(chalk.green(`--- Begin file : "${file}" ---`))
+  log(content)
+  log(chalk.green(`--- End file   : "${file}" ---`))
+  log("\r\n")
 }
 
 /**
