@@ -23,7 +23,7 @@ export const run = async () => {
   const config: Configuration = await getConfiguration()
 
   // check update
-//  checkUpdate()
+  checkUpdate()
 
   // Register prompt types
   registerPrompts()
@@ -41,12 +41,12 @@ export const run = async () => {
   program.command("init").action(initCommand)
 
   program.parse(process.argv)
-
-  //  console.log("\r\n🍵 Be happy drink tea ... matcha tea ... .\r\n")
 }
 
-const runX = () => {
-  console.log("Gloubi boulag!!")
-}
+/* run the program */
 
 run()
+  .then(() => {})
+  .catch((e) => {
+    console.error(e)
+  })

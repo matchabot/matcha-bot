@@ -11,6 +11,7 @@ import path from "path"
 export const registerCommands = (commands: Commands) =>
   getCommands(commands).map((command) => {
     const cmd = program.command(command.name)
+    cmd.option("-f,--force", "Force overwrite file if file already exists")
     command.args.map((args) => {
       const optionName = args.name
       const optionFlag = args.alias ?? args.name.toLocaleLowerCase().slice(0, 1)
@@ -28,13 +29,16 @@ export const registerCommands = (commands: Commands) =>
         // All commands arguments are completed
         const argValues = { ...opts, ...resAskArgs }
 
+        // force
+        const force = argValues.force === true
+
         // generating files
         const genActions = command.actions
         const templateDir =
           command.templateDir ?? path.join(process.cwd(), "./templates")
 
         console.log("\r\n🍵 Generating files:\r\n")
-        await generate(genActions, argValues, templateDir)
+        await generate(genActions, argValues, templateDir, force)
       })
       return cmd
     })

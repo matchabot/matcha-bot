@@ -30,7 +30,8 @@ export const executeTemplate = (
 export const generate = async (
   actions: ActionGenerate[],
   data: Record<string, unknown>,
-  templatePath: string
+  templatePath: string,
+  forceOverwriteFiles: boolean = false
 ) => {
   const outFilesToWrite = await Promise.all(
     actions.map((action) => {
@@ -38,30 +39,9 @@ export const generate = async (
     })
   )
 
-  const outFilesToWriteNoExisting = outFilesToWrite.filter((f) => !f.fileExists)
-  const outFilesToWriteExisting = outFilesToWrite.filter((f) => f.fileExists)
-
-  const overWriteFileAnswers = outFilesToWriteExisting.map((f, index) => ({
-    type: "confirm",
-    name: `q${index}`,
-    message: `Overwrite the file ${f.outputFilePath}`,
-    default: true
-  }))
-
-  const answers = await prompt(overWriteFileAnswers)
-
-  const overWriteFileResult = outFilesToWriteExisting
-    .map((f, index) => ({
-      ...f,
-      overwrite: answers[`q${index}`]
-    }))
-    .filter((f) => f.overwrite)
-    .map(({ overwrite, ...other }) => ({ ...other }))
-
-  const finalFilesToWrite = [
-    ...outFilesToWriteNoExisting,
-    ...overWriteFileResult
-  ]
+  const finalFilesToWrite = forceOverwriteFiles
+    ? outFilesToWrite
+    : await askFilesToOverwrite(outFilesToWrite)
 
   console.log(`\r\nGenerating files:\r\n`)
   finalFilesToWrite.map((file) => {
@@ -114,4 +94,44 @@ const writeFile = (filePath: string, content: string) => {
   fs.ensureDirSync(dirPath)
   fs.writeFileSync(filePath, content)
   return true
+}
+
+/**
+ *
+ * Ask the user wich file to overwrite
+ *
+ * @param outFilesToWrite
+ */
+async function askFilesToOverwrite(
+  outFilesToWrite: {
+    outputFilePath: string
+    outFileContent: string
+    fileExists: boolean
+  }[]
+) {
+  const outFilesToWriteNoExisting = outFilesToWrite.filter((f) => !f.fileExists)
+  const outFilesToWriteExisting = outFilesToWrite.filter((f) => f.fileExists)
+
+  const overWriteFileAnswers = outFilesToWriteExisting.map((f, index) => ({
+    type: "confirm",
+    name: `q${index}`,
+    message: `Overwrite the file ${f.outputFilePath}`,
+    default: true
+  }))
+
+  const answers = await prompt(overWriteFileAnswers)
+
+  const overWriteFileResult = outFilesToWriteExisting
+    .map((f, index) => ({
+      ...f,
+      overwrite: answers[`q${index}`]
+    }))
+    .filter((f) => f.overwrite)
+    .map(({ overwrite, ...other }) => ({ ...other }))
+
+  const finalFilesToWrite = [
+    ...outFilesToWriteNoExisting,
+    ...overWriteFileResult
+  ]
+  return finalFilesToWrite
 }

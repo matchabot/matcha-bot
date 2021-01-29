@@ -1,4 +1,4 @@
-import updateNotifier from "update-notifier"
+import updateNotifier from "update-notifier-webpack"
 import Package from "../../package.json"
 
 export const checkUpdate = () => {

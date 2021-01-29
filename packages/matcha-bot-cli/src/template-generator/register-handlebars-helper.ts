@@ -3,37 +3,51 @@ import Handlebars from "handlebars"
 import _ from "lodash"
 import moment from "moment"
 
+export interface HelperDelegate {
+  (
+    context?: any,
+    arg1?: any,
+    arg2?: any,
+    arg3?: any,
+    arg4?: any,
+    arg5?: any
+  ): any
+}
+
+export const registerHelper = function (name: string, fn: HelperDelegate) {
+  Handlebars.registerHelper(name, fn)
+}
+
 export const registerHandlebarsHelper = () => {
-  Handlebars.registerHelper("camelCase", function (s) {
+  registerHelper("camelCase", function (s) {
     return _.camelCase(s)
   })
 
-  Handlebars.registerHelper("upperCamelCase", function (s) {
+  registerHelper("upperCamelCase", function (s) {
     return _.upperFirst(_.camelCase(s))
   })
 
-  Handlebars.registerHelper("snakeCase", function (s) {
+  registerHelper("snakeCase", function (s) {
     return _.snakeCase(s)
   })
 
-  Handlebars.registerHelper("kebabCase", function (s) {
+  registerHelper("kebabCase", function (s) {
     return _.kebabCase(s)
   })
 
-
-  Handlebars.registerHelper("toLowerCase", function (s) {
+  registerHelper("toLowerCase", function (s) {
     return s.toLowerCase()
   })
 
-  Handlebars.registerHelper("toUpperCase", function (s) {
+  registerHelper("toUpperCase", function (s) {
     return s.toUpperCase()
   })
 
-  Handlebars.registerHelper("formatDate", function (d, format) {
+  registerHelper("formatDate", function (d, format) {
     return moment(d).format(format)
   })
 
-  Handlebars.registerHelper("currentDate", function () {
+  registerHelper("currentDate", function () {
     return moment()
   })
 }

@@ -1,6 +1,6 @@
 {
   "name": "matchabot",
-  "version": "0.0.13",
+  "version": "0.0.17",
   "license": "MIT",
   "dependencies": {
     "commander": "^7.0.0",
@@ -18,7 +18,8 @@
     "moment": "^2.29.1",
     "ora": "^5.3.0",
     "tslib": "^2.1.0",
-    "update-notifier": "^5.0.1"
+    "update-notifier": "^5.0.1",
+    "update-notifier-webpack": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -38,6 +39,7 @@
     "@types/node": "^14.14.22",
     "@types/ora": "^3.2.0",
     "@types/update-notifier": "^5.0.0",
+    "@types/update-notifier-webpack": "npm:@types/update-notifier",
     "babel-loader": "^8.2.2",
     "figlet": "^1.5.0",
     "gradient-string": "^1.2.0",
