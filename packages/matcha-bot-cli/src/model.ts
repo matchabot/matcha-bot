@@ -81,3 +81,14 @@ export type Configuration = {
   outputDirectory: string
   commands: Commands
 }
+
+/**
+ *  Interface for question to the user
+ */
+export interface IQuestion {
+  type: string
+  name: string
+  message: string
+  default: string
+  choices: (string | IChoiceValue)[] | undefined
+}

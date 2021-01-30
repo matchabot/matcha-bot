@@ -16,7 +16,8 @@
     },
     {
       "name": "LicenceType",
-      "alias": "t",
+
+
       "type": "list",
       "choices": [
         { "name": "MIT License", "value": "mit" },

@@ -1,6 +1,7 @@
 import { Commands, Command, Argument, ArgumentType } from "../model"
 import { prompt } from "inquirer"
 import { executeTemplate } from "../template-generator/execute-template"
+import { cpuUsage } from "process"
 
 /**
  * Map matchabot input type to inquirer input type
@@ -61,6 +62,12 @@ export const askCommandArgs = async (
     choices: arg.choices
   }))
 
-  const responses: Record<string, unknown> = await prompt(questions)
+  let responses: Record<string, unknown> = {}
+
+  for (const question of questions) {
+    const response = await prompt([question])
+    responses = { ...response, ...responses }
+  }
+
   return responses
 }

@@ -36,16 +36,17 @@ export const registerCommands = (commands: Commands) =>
           (arg) => !Object.keys(opts).includes(arg.name)
         )
 
+        // Create an evaluation context with all the variables already known and the environment variables
         const context: Record<string, unknown> = {
           ...opts,
           ...getSystemVariables()
         }
-        // Ask missing args
+        // Ask missing args to the user
         const resAskArgs = await askCommandArgs(undefinedArgs, context)
         // All commands arguments are completed
         const argValues = { ...context, ...resAskArgs }
 
-        // force
+        // force and debug flags
         const force = argValues.force === true
         const debugMode = argValues.debug === true
 
