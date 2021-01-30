@@ -1,31 +1,13 @@
 import fs from "fs-extra"
 import path from "path"
-import Handlebars from "handlebars"
 import { ActionGenerate } from "../model"
-import { registerHelpers } from "./register-helper"
 import { localPath } from "../utils/file-utils"
+import { executeTemplate } from "./execute-template"
 import { walkFolderWithTransformAction } from "../utils/file-utils"
 import { prompt } from "inquirer"
 import chalk from "chalk"
-import { transform } from "lodash"
 
 const log = console.log
-
-registerHelpers()
-
-/**
- *
- * @param templateSpec
- * @param data
- */
-export const executeTemplate = (
-  templateSpec: string,
-  data: Record<string, unknown>
-) => {
-  const template = Handlebars.compile(templateSpec)
-  const output = template(data)
-  return output
-}
 
 /**
  *
@@ -71,11 +53,8 @@ const prepareFiles = async (
   // Case 1 - copy directory action
   if (action.type === "copy-directory") {
     // We evaluate the template with variables in data
-    const sourceDirectory = executeTemplate(action.sourceDirectory, data)
-    const destinationDirectory = executeTemplate(
-      action.destinationDirectory,
-      data
-    )
+    const sourceDirectory = executeTemplate(action.source, data)
+    const destinationDirectory = executeTemplate(action.target, data)
     // Normalize directory path
     const sourceDirectoryPath = path.join(templatePath, sourceDirectory)
     const outputFilePath = path.join(process.cwd(), destinationDirectory)
@@ -90,8 +69,8 @@ const prepareFiles = async (
   // Case 2 or 3
   // template or copy action
   // We evaluate the template with variables in data
-  const sourceTemplate = executeTemplate(action.sourceTemplate, data)
-  const destTemplate = executeTemplate(action.outFile, data)
+  const sourceTemplate = executeTemplate(action.source, data)
+  const destTemplate = executeTemplate(action.target, data)
 
   // Normalize directory path
   const sourceTemplateFilePath = path.join(templatePath, sourceTemplate)

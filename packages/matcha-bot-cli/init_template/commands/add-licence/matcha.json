@@ -6,7 +6,8 @@
     {
       "name": "CopyRightsHolder",
       "alias": "c",
-      "type": "string"
+      "type": "string",
+      "default": "{{process.env.LOGNAME}}"
     },
     {
       "name": "ProgramDescription",
@@ -30,8 +31,8 @@
     {
       "type": "template",
       "name": "Generate Licence",
-      "outFile": "LICENCE.md",
-      "sourceTemplate": "{{toLowerCase LicenceType}}.md.hbs"
+      "source": "{{toLowerCase LicenceType}}.md.hbs",
+      "target": "LICENCE.md"
     }
   ]
 }

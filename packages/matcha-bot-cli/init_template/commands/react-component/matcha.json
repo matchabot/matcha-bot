@@ -17,20 +17,20 @@
     {
       "type": "template",
       "name": "Generate ReactComponent",
-      "outFile": "{{TargetDirectory}}/{{kebabCase ComponentName}}/index.tsx",
-      "sourceTemplate": "component.tsx.hbs"
+      "source": "component.tsx.hbs",
+      "target": "{{TargetDirectory}}/{{kebabCase ComponentName}}/index.tsx"
     },
     {
       "type": "template",
       "name": "Generate Style for Component",
-      "outFile": "{{TargetDirectory}}/{{kebabCase ComponentName}}/style.tsx",
-      "sourceTemplate": "style.tsx.hbs"
+      "source": "style.tsx.hbs",
+      "target": "{{TargetDirectory}}/{{kebabCase ComponentName}}/style.tsx"
     },
     {
       "type": "template",
       "name": "Generate Story",
-      "outFile": "{{TargetDirectory}}/{{kebabCase ComponentName}}/{{kebabCase ComponentName}}.stories.tsx",
-      "sourceTemplate": "stories.tsx.hbs"
+      "source": "stories.tsx.hbs",
+      "target": "{{TargetDirectory}}/{{kebabCase ComponentName}}/{{kebabCase ComponentName}}.stories.tsx"
     }
   ]
 }

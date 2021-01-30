@@ -24,14 +24,14 @@
     {
       "type": "template",
       "name": "Generate a matcha.json file",
-      "outFile": "./.matchabot/{{kebabCase CommandName}}/matcha.json",
-      "sourceTemplate": "matcha.json.hbs"
+      "source": "matcha.json.hbs",
+      "target": "./.matchabot/{{kebabCase CommandName}}/matcha.json"
     },
     {
       "type": "copy",
       "name": "Generate a text file",
-      "outFile": "./.matchabot/{{kebabCase CommandName}}/text.txt.hbs",
-      "sourceTemplate": "text.txt.hbs"
+      "source": "text.txt.hbs",
+      "target": "./.matchabot/{{kebabCase CommandName}}/text.txt.hbs"
     }
   ]
 }

@@ -7,6 +7,11 @@ export const getSystemVariables = () => {
     __generatorVersion: version,
     __currentYear: moment().format("YYYY"),
     __currentMonth: moment().format("MM"),
-    __currentDay: moment().format("")
+    __currentDay: moment().format(""),
+    process: {
+      env: {
+        ...process.env
+      }
+    }
   }
 }

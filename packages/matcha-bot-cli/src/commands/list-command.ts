@@ -27,7 +27,7 @@ export const listCommands = (commands: Commands) => {
 
   if (commandTable.length === 0) {
     log("\r\n")
-    log("🍵 No command availale")
+    log("🍵 No command available")
     log("\r\n")
     log("Try:")
     log("----")

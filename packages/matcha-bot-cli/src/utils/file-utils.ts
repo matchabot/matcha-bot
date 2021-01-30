@@ -82,7 +82,10 @@ export const copyFolderSync = (from: string, to: string) => {
     }
   })
 }
-
+/**
+ * Return the first existing filePath from a list of possibles filePaths
+ * @param filePaths
+ */
 export const findFirstExisting = (filePaths: ReadonlyArray<string>) => {
   const resultFile = filePaths.find((filePath) => existsSync(filePath))
 

@@ -35,10 +35,15 @@ export const registerCommands = (commands: Commands) =>
         const undefinedArgs = args.filter(
           (arg) => !Object.keys(opts).includes(arg.name)
         )
+
+        const context: Record<string, unknown> = {
+          ...opts,
+          ...getSystemVariables()
+        }
         // Ask missing args
-        const resAskArgs = await askCommandArgs(undefinedArgs)
+        const resAskArgs = await askCommandArgs(undefinedArgs, context)
         // All commands arguments are completed
-        const argValues = { ...opts, ...resAskArgs }
+        const argValues = { ...context, ...resAskArgs }
 
         // force
         const force = argValues.force === true
@@ -49,8 +54,7 @@ export const registerCommands = (commands: Commands) =>
         const templateDir =
           command.templateDir ?? path.join(process.cwd(), "./templates")
 
-        // Merge with system variables (such as {___currentDateTime,__generatorVersion})
-        const data = { ...argValues, ...getSystemVariables() }
+        const data = { ...argValues }
 
         log("\r\n🍵 Generating files:\r\n")
         await generate(genActions, data, templateDir, force, debugMode)

@@ -10,7 +10,7 @@ export type Argument = {
   name: string
   alias?: string
   description?: string
-  default: unknown
+  default: string
   choices?: (string | IChoiceValue)[]
 }
 
@@ -28,11 +28,11 @@ export type ActionTemplate = {
   /**
    * The source file template
    */
-  sourceTemplate: string
+  source: string
   /**
    * The fileName of the genated file
    */
-  outFile: string
+  target: string
 }
 
 export type ActionCopy = {
@@ -40,11 +40,11 @@ export type ActionCopy = {
   /**
    * The source file template
    */
-  sourceTemplate: string
+  source: string
   /**
-   * The fileName of the genated file
+   * The fileName of the generated file
    */
-  outFile: string
+  target: string
 }
 
 export type ActionCopyDirectory = {
@@ -52,11 +52,11 @@ export type ActionCopyDirectory = {
   /**
    * The source file template
    */
-  sourceDirectory: string
+  source: string
   /**
-   * The fileName of the genated file
+   * The fileName of the generated file
    */
-  destinationDirectory: string
+  target: string
 }
 
 /**
