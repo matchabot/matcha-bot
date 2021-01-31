@@ -25,13 +25,13 @@
       "type": "template",
       "name": "Generate a matcha.json file",
       "source": "matcha.json.hbs",
-      "target": "./.matchabot/{{kebabCase CommandName}}/matcha.json"
+      "target": "./.matchabot/commands/{{kebabCase CommandName}}/matcha.json"
     },
     {
       "type": "copy",
       "name": "Generate a text file",
       "source": "text.txt.hbs",
-      "target": "./.matchabot/{{kebabCase CommandName}}/text.txt.hbs"
+      "target": "./.matchabot/commands/{{kebabCase CommandName}}/text.txt.hbs"
     }
   ]
 }

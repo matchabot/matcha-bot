@@ -12,8 +12,8 @@ import {
 export type CopyAction = {
   fromPath: string
   toPath: string
-  sourceContent: string
   destinationContent: string
+  toPathExists: boolean
 }
 
 /**
@@ -38,13 +38,14 @@ export const walkFolderWithTransformAction = (
       if (lstatSync(path.join(from, currentFile)).isFile()) {
         const fromPath = path.join(from, currentFile)
         const destPath = path.join(to, currentFile)
+        const destPathExists = existsSync(destPath)
         const sourceContent = readFileSync(fromPath, { encoding: "utf8" })
         const destinationContent = transformAction(sourceContent)
         const fileAction: CopyAction = {
           fromPath: fromPath,
           toPath: destPath,
           destinationContent: destinationContent,
-          sourceContent: sourceContent
+          toPathExists: destPathExists
         }
         return [...accumulator, fileAction]
       }

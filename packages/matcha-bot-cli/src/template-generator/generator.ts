@@ -1,6 +1,6 @@
 import fs from "fs-extra"
 import path from "path"
-import { ActionGenerate } from "../model"
+import { ActionCopyDirectory, ActionGenerate } from "../model"
 import { localPath } from "../utils/file-utils"
 import { executeTemplate } from "./execute-template"
 import { walkFolderWithTransformAction } from "../utils/file-utils"
@@ -53,17 +53,7 @@ const prepareFiles = async (
   // Case 1 - copy directory action
   if (action.type === "copy-directory") {
     // We evaluate the template with variables in data
-    const sourceDirectory = executeTemplate(action.source, data)
-    const destinationDirectory = executeTemplate(action.target, data)
-    // Normalize directory path
-    const sourceDirectoryPath = path.join(templatePath, sourceDirectory)
-    const outputFilePath = path.join(process.cwd(), destinationDirectory)
-
-    //   const transformAction = (content : string) => (conte)
-
-    //    walkFolderWithTransformAction(sourceDirectoryPath,,destinationDirectory,transform)
-
-    return []
+    return copyTemplateDirectory(action, data, templatePath)
   }
 
   // Case 2 or 3
@@ -113,6 +103,7 @@ const writeFile = (filePath: string, content: string) => {
 
 /**
  * Write output to the console for debugging
+ *
  * @param filePath
  * @param content
  */
@@ -123,6 +114,42 @@ const writeFileDebug = (filePath: string, content: string) => {
   log(content)
   log(chalk.green(`--- End file   : "${file}" ---`))
   log("\r\n")
+}
+
+/**
+ *
+ * Execute a copy directory with template
+ *
+ * @param action
+ * @param data
+ * @param templatePath
+ */
+function copyTemplateDirectory(
+  action: ActionCopyDirectory,
+  data: Record<string, unknown>,
+  templatePath: string
+) {
+  const sourceDirectory = executeTemplate(action.source, data)
+  const destinationDirectory = executeTemplate(action.target, data)
+  // Normalize directory path
+  const sourceDirectoryPath = path.join(templatePath, sourceDirectory)
+  const outputFilePath = path.join(process.cwd(), destinationDirectory)
+
+  const transformAction = (content: string) => executeTemplate(content, data)
+
+  const actions = walkFolderWithTransformAction(
+    sourceDirectoryPath,
+    destinationDirectory,
+    transformAction
+  )
+
+  const res = actions.map((action) => ({
+    outputFilePath: action.toPath,
+    outFileContent: action.destinationContent,
+    fileExists: action.toPathExists
+  }))
+
+  return res
 }
 
 /**
