@@ -51,13 +51,19 @@ export const executeCommands = (
       }
       case "copy-directory":
       case "template-directory": {
-        const actionType = "copy-directory" ? "copy" : "template"
+        const actionType =
+          action.type === "copy-directory" ? "copy" : "template"
         // Interpret variable on source and target path definition
         const sourcePath = executeTemplate(action.source, data)
         const targetPath = executeTemplate(action.target, data)
         // Normalize directory path
-        const fullSourcePath = path.join(templatePath, sourcePath)
-        const fullTargetPath = path.join(process.cwd(), targetPath)
+        const fullSourcePath = path.isAbsolute(sourcePath)
+          ? sourcePath
+          : path.join(templatePath, sourcePath)
+        const fullTargetPath = path.isAbsolute(targetPath)
+          ? targetPath
+          : path.join(process.cwd(), targetPath)
+
         const copyFolderActions = walkFolderAndPrepareTransformActions(
           fullSourcePath,
           fullTargetPath
@@ -65,6 +71,8 @@ export const executeCommands = (
           type: actionType,
           ...action
         }))
+
+        //console.dir(copyFolderActions, { depth: null })
 
         const res = await executeCommands(
           copyFolderActions,
@@ -120,8 +128,12 @@ const executeActionTemplate = async (
   const targetPath = executeTemplate(action.target, data)
 
   // Normalize directory path
-  const fullSourcePath = path.join(templatePath, sourcePath)
-  const fullTargetPath = path.join(process.cwd(), targetPath)
+  const fullSourcePath = path.isAbsolute(sourcePath)
+    ? sourcePath
+    : path.join(templatePath, sourcePath)
+  const fullTargetPath = path.isAbsolute(targetPath)
+    ? targetPath
+    : path.join(process.cwd(), targetPath)
 
   let skipFile = false
 
@@ -138,7 +150,7 @@ const executeActionTemplate = async (
     // detect file type
     const fileType = (await FileType.fromFile(fullSourcePath)) ?? "utf8"
 
-    console.log(`${fullSourcePath} fileType: ${fileType}`)
+    //console.log(`${fullSourcePath} fileType: ${fileType}`)
 
     // If it is a temlplate and the file type is compatible
     if (fileType === "utf8" && action.type === "template") {
@@ -147,13 +159,16 @@ const executeActionTemplate = async (
       if (debugMode) {
         writeFileDebug(fullTargetPath, transformedContent)
       } else {
-        const targetPath = path.dirname(fullTargetPath)
-        await fs.ensureDir(targetPath)
+        const targetDir = path.dirname(fullTargetPath)
+        await fs.ensureDir(targetDir)
         await fs.writeFile(fullTargetPath, transformedContent, "utf8")
       }
     } // Copy
     else {
-      await fs.ensureDir(targetPath)
+      const targetDir = path.dirname(fullTargetPath)
+      // console.log(`Ensure Dir ${targetDir}`)
+      await fs.ensureDir(targetDir)
+      // console.log(`Copy from ${fullSourcePath} to ${fullTargetPath}`)
       await fs.copyFile(fullSourcePath, fullTargetPath)
       if (debugMode) {
         log(`👉 copy file ${fullSourcePath} to ${fullTargetPath}`)

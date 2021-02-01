@@ -11,10 +11,10 @@
   ],
   "actions": [
     {
-      "type": "copy-directory",
-      "name": "Generate Licence",
+      "type": "template-directory",
+      "name": "Create Project",
       "source": "./template",
-      "target": "./{ApplicationName}"
+      "target": "./{{ApplicationName}}"
     }
   ]
 }
