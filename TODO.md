@@ -1,11 +1,12 @@
 # TODO
 
-- [ ] Implement init command
-- [ ] Implement default parameters
-- [ ] Implement --force flags (overwrite)
-- [ ] Publish on NPM
-- [ ] Implement automatic updates
-- [ ] Implement assisted created command
+- [x] Implement init command
+- [x] Implement default parameters
+- [x] Implement --force flags (overwrite)
+- [x] Publish on NPM
+- [x] Implement automatic updates
+- [x] Implement assisted created command
 - [ ] Implement assisted test command
 - [ ] Implement condition in action
 - [ ] Save input as parameters
+- [x] Implement copy directory action
