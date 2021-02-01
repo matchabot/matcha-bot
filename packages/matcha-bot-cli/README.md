@@ -4,7 +4,7 @@
 
 **MatchaBot** is a code generator. You can use **matchabot** to create an entire project, or to generate code inside an existing project in a consistent way.
 
-![MatchaBot](doc/matchabot.gif)
+![MatchaBot](./doc/matchabot.gif)
 
 ### Features
 

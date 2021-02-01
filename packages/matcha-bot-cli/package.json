@@ -92,7 +92,8 @@
     "/bin",
     "/lib",
     "/fonts/Standard.flf",
-    "/init_template"
+    "/init_template",
+    "/doc"
   ],
   "engines": {
     "node": ">=10.0.0"
