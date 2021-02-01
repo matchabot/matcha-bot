@@ -75,7 +75,6 @@ Example **`./.matchabot/add-licence/matcha.json`**:
     {
       "name": "LicenceType",
 
-
       "type": "list",
       "choices": [
         { "name": "MIT License", "value": "mit" },
@@ -96,7 +95,6 @@ Example **`./.matchabot/add-licence/matcha.json`**:
   ]
 }
 ```
-
 
 **List availables commands**
 
@@ -131,9 +129,3 @@ Version: 0.2.0 🍵
 ```bash
 matchabot add-licence
 ```
-
-**Result:**
-
-![Resut](./doc/01.png)
-
-## Add a new command
