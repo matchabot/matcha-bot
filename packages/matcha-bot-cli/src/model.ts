@@ -59,9 +59,25 @@ export type ActionCopyDirectory = {
   target: string
 }
 
+export type ActionTemplateDirectory = {
+  type: "template-directory"
+  /**
+   * The source file template
+   */
+  source: string
+  /**
+   * The fileName of the generated file
+   */
+  target: string
+}
+
 /**
  */
-export type ActionGenerate = ActionTemplate | ActionCopy | ActionCopyDirectory
+export type ActionGenerate =
+  | ActionTemplate
+  | ActionCopy
+  | ActionCopyDirectory
+  | ActionTemplateDirectory
 
 export type Command = {
   name: string

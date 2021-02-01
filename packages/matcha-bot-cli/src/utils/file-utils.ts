@@ -10,9 +10,8 @@ import {
 } from "fs"
 
 export type CopyAction = {
-  fromPath: string
-  toPath: string
-  toPathExists: boolean
+  source: string
+  target: string
 }
 
 /**
@@ -35,11 +34,9 @@ export const walkFolderAndPrepareTransformActions = (
       if (lstatSync(path.join(from, currentFile)).isFile()) {
         const fromPath = path.join(from, currentFile)
         const destPath = path.join(to, currentFile)
-        const destPathExists = existsSync(destPath)
         const fileAction: CopyAction = {
-          fromPath: fromPath,
-          toPath: destPath,
-          toPathExists: destPathExists
+          source: fromPath,
+          target: destPath
         }
         return [...accumulator, fileAction]
       }

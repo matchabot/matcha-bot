@@ -4,7 +4,12 @@ import { ActionCopy, ActionGenerate, ActionTemplate } from "../model"
 import { executeTemplate } from "../template-generator/execute-template"
 import { prompt } from "inquirer"
 import chalk from "chalk"
-import { localPath } from "../utils/file-utils"
+import FileType from "file-type"
+import {
+  localPath,
+  walkFolderAndPrepareTransformActions
+} from "../utils/file-utils"
+import { Console } from "console"
 
 const log = console.log
 
@@ -18,9 +23,9 @@ export type ResultAction = {
  * Execute a list of actions
  * @param actions array of actions to execute
  * @param data  a directory of variables
- * @param templatePath 
- * @param forceOverwriteFiles 
- * @param debugMode 
+ * @param templatePath
+ * @param forceOverwriteFiles
+ * @param debugMode
  */
 export const executeCommands = (
   actions: ActionGenerate[],
@@ -28,7 +33,7 @@ export const executeCommands = (
   templatePath: string,
   forceOverwriteFiles: boolean = false,
   debugMode: boolean = false
-) => {
+): Promise<ResultAction[]> => {
   // synchronous execution of each action
   const res = actions.reduce(async (accP, action) => {
     const acc = await accP
@@ -43,6 +48,32 @@ export const executeCommands = (
           debugMode
         )
         return [...acc, actionRes]
+      }
+      case "copy-directory":
+      case "template-directory": {
+        const actionType = "copy-directory" ? "copy" : "template"
+        // Interpret variable on source and target path definition
+        const sourcePath = executeTemplate(action.source, data)
+        const targetPath = executeTemplate(action.target, data)
+        // Normalize directory path
+        const fullSourcePath = path.join(templatePath, sourcePath)
+        const fullTargetPath = path.join(process.cwd(), targetPath)
+        const copyFolderActions = walkFolderAndPrepareTransformActions(
+          fullSourcePath,
+          fullTargetPath
+        ).map((action): ActionCopy | ActionTemplate => ({
+          type: actionType,
+          ...action
+        }))
+
+        const res = await executeCommands(
+          copyFolderActions,
+          data,
+          templatePath,
+          forceOverwriteFiles,
+          debugMode
+        )
+        return acc.concat(res)
       }
       default:
         return acc
@@ -104,19 +135,29 @@ const executeActionTemplate = async (
   const canExecute = skipFile === false || forceOverwrite || debugMode
 
   if (canExecute) {
-    const fileContent = await fs.readFile(fullSourcePath, "utf8")
+    // detect file type
+    const fileType = (await FileType.fromFile(fullSourcePath)) ?? "utf8"
 
-    const transformedContent =
-      action.type === "template"
-        ? executeTemplate(fileContent, data)
-        : fileContent
+    console.log(`${fullSourcePath} fileType: ${fileType}`)
 
-    if (debugMode) {
-      writeFileDebug(fullTargetPath, transformedContent)
-    } else {
-      const targetPath = path.dirname(fullTargetPath)
+    // If it is a temlplate and the file type is compatible
+    if (fileType === "utf8" && action.type === "template") {
+      const fileContent = await fs.readFile(fullSourcePath, "utf8")
+      const transformedContent = executeTemplate(fileContent, data)
+      if (debugMode) {
+        writeFileDebug(fullTargetPath, transformedContent)
+      } else {
+        const targetPath = path.dirname(fullTargetPath)
+        await fs.ensureDir(targetPath)
+        await fs.writeFile(fullTargetPath, transformedContent, "utf8")
+      }
+    } // Copy
+    else {
       await fs.ensureDir(targetPath)
-      await fs.writeFile(fullTargetPath, transformedContent, "utf8")
+      await fs.copyFile(fullSourcePath, fullTargetPath)
+      if (debugMode) {
+        log(`👉 copy file ${fullSourcePath} to ${fullTargetPath}`)
+      }
     }
   }
 
