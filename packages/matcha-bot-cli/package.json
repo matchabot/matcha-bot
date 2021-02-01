@@ -12,6 +12,22 @@
   "repository": {
     "url": "https://github.com/raphaelmansuy/matcha-bot"
   },
+  "keywords": [
+    "development",
+    "dev",
+    "build",
+    "tool",
+    "cli",
+    "scaffold",
+    "generate",
+    "generator",
+    "matchabot",
+    "app",
+    "yeoman",
+    "plop",
+    "gen",
+    "make"
+  ],
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^7.0.0",
