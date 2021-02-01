@@ -1,10 +1,10 @@
-import { generate } from "../template-generator/generator"
 import { getCommands, askCommandArgs, getArgs } from "./commands-util"
 import { Commands } from "../model"
 import { program } from "commander"
 import { getSystemVariables } from "../template-generator/add-system-variables"
 import path from "path"
-
+import { executeCommands } from "./commands-execute"
+import c from "chalk"
 const log = console.log
 
 /**
@@ -57,8 +57,25 @@ export const registerCommands = (commands: Commands) =>
 
         const data = { ...argValues }
 
-        log("\r\n🍵 Generating files:\r\n")
-        await generate(genActions, data, templateDir, force, debugMode)
+        log("\r\n🍵 Generating files ...\r\n")
+        const res = await executeCommands(
+          genActions,
+          data,
+          templateDir,
+          force,
+          debugMode
+        )
+
+        const displayMessage = debugMode
+          ? "\r\n👉 Result files (Debug Mode)\r\n"
+          : "\r\n👉 Created files \r\n"
+
+        log(displayMessage)
+        res.reduce((acc, result) => {
+          const symbol = result.skipped ? "❌" : "✅"
+          log(`${acc + 1} - ${symbol}  ${result.outFile}`)
+          return acc + 1
+        }, 0)
       })
       return cmd
     })

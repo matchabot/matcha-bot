@@ -34,7 +34,7 @@ export const getConfiguration = async (): Promise<Configuration> => {
       const filePath = localPath(entry)
       error(
         c.yellow(
-          ` ⚠️ : configuration file ignored "${filePath}": ${err.message}`
+          ` ⚠️ : Error, configuration file ignored "${filePath}": ${err.message}`
         )
       )
       return accP

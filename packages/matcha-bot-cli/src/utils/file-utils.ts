@@ -12,7 +12,6 @@ import {
 export type CopyAction = {
   fromPath: string
   toPath: string
-  destinationContent: string
   toPathExists: boolean
 }
 
@@ -21,13 +20,11 @@ export type CopyAction = {
  * containing the sourceFilePath, destinationPath, sourceContentFile and transformed destinationContent
  * @param from source directory
  * @param to destination directory
- * @param transformAction transformation function
  * @param currentActions list of actions (must be called initialy with an empty array)
  */
-export const walkFolderWithTransformAction = (
+export const walkFolderAndPrepareTransformActions = (
   from: string,
   to: string,
-  transformAction: (source: string) => string = (s) => s, // identify function by default
   currentActions: CopyAction[] = [] // Empty array
 ): CopyAction[] => {
   const fileEntries = readdirSync(from)
@@ -39,21 +36,17 @@ export const walkFolderWithTransformAction = (
         const fromPath = path.join(from, currentFile)
         const destPath = path.join(to, currentFile)
         const destPathExists = existsSync(destPath)
-        const sourceContent = readFileSync(fromPath, { encoding: "utf8" })
-        const destinationContent = transformAction(sourceContent)
         const fileAction: CopyAction = {
           fromPath: fromPath,
           toPath: destPath,
-          destinationContent: destinationContent,
           toPathExists: destPathExists
         }
         return [...accumulator, fileAction]
       }
       // case of a directory
-      const childActions = walkFolderWithTransformAction(
+      const childActions = walkFolderAndPrepareTransformActions(
         path.join(from, currentFile),
         path.join(to, currentFile),
-        transformAction,
         currentActions
       )
 
@@ -71,7 +64,11 @@ export const walkFolderWithTransformAction = (
  * @param from source directory
  * @param to destination directory
  */
-export const copyFolderSync = (from: string, to: string) => {
+export const copyFolderSync = (
+  from: string,
+  to: string,
+  confirmWriteExistingFile: (filePath: string) => boolean = (filePath) => true
+) => {
   if (!existsSync(to)) {
     mkdirSync(to)
   }
@@ -79,7 +76,11 @@ export const copyFolderSync = (from: string, to: string) => {
     if (lstatSync(path.join(from, element)).isFile()) {
       copyFileSync(path.join(from, element), path.join(to, element))
     } else {
-      copyFolderSync(path.join(from, element), path.join(to, element))
+      copyFolderSync(
+        path.join(from, element),
+        path.join(to, element),
+        confirmWriteExistingFile
+      )
     }
   })
 }
@@ -89,7 +90,6 @@ export const copyFolderSync = (from: string, to: string) => {
  */
 export const findFirstExisting = (filePaths: ReadonlyArray<string>) => {
   const resultFile = filePaths.find((filePath) => existsSync(filePath))
-
   return resultFile
 }
 
