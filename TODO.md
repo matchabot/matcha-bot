@@ -10,3 +10,6 @@
 - [ ] Implement condition in action
 - [ ] Save input as parameters
 - [x] Implement copy directory action
+- [ ] Implement Update file
+- [ ] Implement append to file
+- [ ] Implement confition in question

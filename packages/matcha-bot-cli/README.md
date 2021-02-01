@@ -2,8 +2,6 @@
 
 ## Introduction
 
-> 🍵 **MatchaBot** : a template generator on steroids 🚀
-
 **MatchaBot** is a code generator. You can use **matchabot** to create an entire project, or to generate code inside an existing project in a consistent way.
 
 ### Features
@@ -20,26 +18,31 @@
 
 ### Key concepts
 
-👉 A code generator is identified by a **command**.
-👉 A **command** takes a list of **arguments** as input and execute a list of **generator actions** ⚙️.
-👉 ️️A **generator action** is specified by one or multiple **template** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
-👉 The generators definitions are stored inside your project inside the **"./.machatbot"** directory
+- 👉 A code generator is identified by a **command**.
+- 👉 A **command** takes a list of **arguments** as input and execute a list of **generator actions** ⚙️.
+- 👉 ️️A **generator action** is specified by one or multiple **template** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
+- 👉 The generators definitions are stored inside your project inside the **`./.machatbot`** directory
+- 👉 Each **command** is defined by a **`matcha.json`** file inside the **`./.machatbot`** directory
 
 ### How to start
 
 **Add matchabot to your project**
 
+Execute the following command at the root of your project.
+
 ```bash
 yarn add matchabot --dev
 ```
 
-**Initialise matchabot for your project**
+**Initialise matchabot**
+
+Execute the following command at the root of your project.
 
 ```bash
 matchabot init
 ```
 
-👉 This command create a local directory **./.matchabot** inside your project
+👉 This command create a local directory **`./.matchabot`** inside your project
 
 ```bash
 ./.matchabot
@@ -47,6 +50,53 @@ matchabot init
     ├── add-command
     ├── add-licence
 ```
+
+The **command** directory contains a list of subdirectory. Each subdirectory contains a **matcha.json** file that defines the **command** and a list of asociated **templates**.
+
+Example **`./.matchabot/add-licence/matcha.json`**:
+
+```json
+{
+  "name": "add-licence",
+  "description": "add a licence file to your project",
+  "version": "1.0.0",
+  "args": [
+    {
+      "name": "CopyRightsHolder",
+      "alias": "c",
+      "type": "string",
+      "default": "{{process.env.LOGNAME}}"
+    },
+    {
+      "name": "ProgramDescription",
+      "alias": "p",
+      "type": "string"
+    },
+    {
+      "name": "LicenceType",
+
+
+      "type": "list",
+      "choices": [
+        { "name": "MIT License", "value": "mit" },
+        { "name": "BSD License", "value": "bsd" },
+        { "name": "Apache License, Version 2.0", "value": "apache2" },
+        { "name": "GNU General Public License version 3", "value": "gnu3" }
+      ],
+      "default": "MIT"
+    }
+  ],
+  "actions": [
+    {
+      "type": "template",
+      "name": "Generate Licence",
+      "source": "{{toLowerCase LicenceType}}.md.hbs",
+      "target": "LICENCE.md"
+    }
+  ]
+}
+```
+
 
 **List availables commands**
 
@@ -87,5 +137,3 @@ matchabot add-licence
 ![Resut](./doc/01.png)
 
 ## Add a new command
-
-
