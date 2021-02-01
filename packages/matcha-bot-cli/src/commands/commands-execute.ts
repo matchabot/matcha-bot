@@ -9,7 +9,6 @@ import {
   localPath,
   walkFolderAndPrepareTransformActions
 } from "../utils/file-utils"
-import { Console } from "console"
 
 const log = console.log
 

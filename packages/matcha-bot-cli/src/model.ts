@@ -1,4 +1,4 @@
-export type ArgumentType = "string" | "number" | "path" | "list"
+export type ArgumentType = "string" | "number" | "path" | "list" | "password"
 
 export interface IChoiceValue {
   name: string

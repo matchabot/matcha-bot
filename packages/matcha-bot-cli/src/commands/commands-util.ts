@@ -17,6 +17,8 @@ const getInputType = (inputType: ArgumentType) => {
       return "path"
     case "list":
       return "list"
+    case "password":
+      return "password"
     default:
       return "input"
   }
@@ -58,7 +60,7 @@ export const askCommandArgs = async (
     type: getInputType(arg.type),
     name: arg.name,
     message: arg.description ?? `${arg.name}`,
-    default: arg.default ? executeTemplate(arg.default, context) : arg.default, // Interprete default value as an expression
+    default: arg.default ? executeTemplate(arg.default, context) : arg.default, // Interpret default value as an expression
     choices: arg.choices
   }))
 
