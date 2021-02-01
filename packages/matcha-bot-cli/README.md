@@ -18,9 +18,9 @@
 
 ### Key concepts
 
-- 👉 A code generator is identified by a **command**.
+- 👉 A **code generator** is identified by a **command**.
 - 👉 A **command** takes a list of **arguments** as input and execute a list of **generator actions** ⚙️.
-- 👉 ️️A **generator action** is specified by one or multiple **template** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
+- 👉 ️️A **generator action** is specified by one or multiple **templates** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
 - 👉 The generators definitions are stored inside your project inside the **`./.machatbot`** directory
 - 👉 Each **command** is defined by a **`matcha.json`** file inside the **`./.machatbot`** directory
 
