@@ -4,7 +4,8 @@
 
 **MatchaBot** is a code generator. You can use **matchabot** to create an entire project, or to generate code inside an existing project in a consistent way.
 
-[![asciicast](https://asciinema.org/a/388402.svg)](https://asciinema.org/a/388402)
+![MatchaBot](doc/matchabot.gif)
+
 ### Features
 
 - ✅ Easy to use **in project** generator
