@@ -2,7 +2,12 @@
 
 ## Introduction
 
-**MatchaBot** is a code generator. You can use **matchabot** to create an entire project, or to generate code inside an existing project in a consistent way.
+🍵 **MatchaBot** is a code generator written in TypeScript with NodeJS.
+
+![MatchaBot](packages/matcha-bot-cli/doc/matchabot.gif)
+
+
+You can use **matchabot** to create an entire project, or to generate code inside an existing project in a consistent way. This project has been created to offer a "Ruby on Rail" like programming experience with "React Projects".
 
 ### Features
 
@@ -133,3 +138,5 @@ matchabot add-licence
 **Result:**
 
 ![Resut](./packages/matcha-bot-cli/doc/01.png)
+
+##
