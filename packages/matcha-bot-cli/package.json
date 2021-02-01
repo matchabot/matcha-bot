@@ -10,7 +10,7 @@
     "email": "contact+bug@elitizon.com"
   },
   "repository": {
-    "url": "https://github.com/raphaelmansuy/matcha-bot"
+    "url": "https://github.com/matchabot/matcha-bot"
   },
   "keywords": [
     "development",
@@ -92,8 +92,7 @@
     "/bin",
     "/lib",
     "/fonts/Standard.flf",
-    "/init_template",
-    "/doc"
+    "/init_template"
   ],
   "engines": {
     "node": ">=10.0.0"
