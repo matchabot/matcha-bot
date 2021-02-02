@@ -1,19 +1,19 @@
-import { getCommands, askCommandArgs, getArgs } from "./commands-util"
-import { Commands } from "../model"
-import { program } from "commander"
+import { recordToArray, askCommandArgs, getArgs } from "./commands-util"
+import { Commands, Configuration } from "../model"
+import commander, { program } from "commander"
 import { getSystemVariables } from "../template-generator/add-system-variables"
 import path from "path"
 import { executeCommands } from "./commands-execute"
 import c from "chalk"
+import { listCommands } from "./list-commands"
 const log = console.log
 
-/**
- * Register a list of commands
- * @param commands
- */
-export const registerCommands = (commands: Commands) =>
-  getCommands(commands).map((command) => {
-    const cmd = program.command(command.name)
+export const registerCommands = (
+  parentCommand: commander.Command,
+  commands: Commands
+) =>
+  recordToArray(commands).map((command) => {
+    const cmd = parentCommand.command(command.name)
 
     // Force option
     cmd.option("--force", "force overwrite file if file already exists")
@@ -80,3 +80,20 @@ export const registerCommands = (commands: Commands) =>
       return cmd
     })
   })
+
+/**
+ * Register a list of commands
+ * @param commands
+ */
+export const registerGenerators = (config: Configuration) => {
+  const generators = recordToArray(config.generators).map((generator) => {
+    const cmdGenerator = program
+      .command(generator.name)
+      .description(generator.description ?? "")
+      .action(() => {
+        listCommands(generator)
+      })
+
+    registerCommands(cmdGenerator, generator.commands)
+  })
+}

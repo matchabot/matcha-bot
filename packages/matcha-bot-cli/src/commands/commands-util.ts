@@ -1,7 +1,6 @@
 import { Commands, Command, Argument, ArgumentType } from "../model"
 import { prompt } from "inquirer"
 import { executeTemplate } from "../template-generator/execute-template"
-import { cpuUsage } from "process"
 
 /**
  * Map matchabot input type to inquirer input type
@@ -24,12 +23,8 @@ const getInputType = (inputType: ArgumentType) => {
   }
 }
 
-/**
- * Create a commands object from a list of commands
- * @param commands
- */
-export const getCommands = (commands: Commands) => {
-  return Object.keys(commands).map((k) => commands[k])
+export const recordToArray = <T>(dic: Record<string, T>) => {
+  return Object.keys(dic).map((k) => dic[k])
 }
 
 /**
@@ -45,7 +40,7 @@ export const getArgs = (command: Command) => {
  * @param commands
  */
 export const getCommandNames = (commands: Commands) =>
-  getCommands(commands).map((c) => c.name)
+  recordToArray(commands).map((c) => c.name)
 
 /**
  * Prepare a list of questions from a list of arguments

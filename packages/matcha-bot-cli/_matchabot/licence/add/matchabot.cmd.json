@@ -1,0 +1,38 @@
+{
+  "name": "add",
+  "description": "add a licence file to your project",
+  "version": "1.0.0",
+  "args": [
+    {
+      "name": "CopyRightsHolder",
+      "alias": "c",
+      "type": "string",
+      "default": "{{process.env.LOGNAME}}"
+    },
+    {
+      "name": "ProgramDescription",
+      "alias": "p",
+      "type": "string"
+    },
+    {
+      "name": "LicenceType",
+
+      "type": "list",
+      "choices": [
+        { "name": "MIT License", "value": "mit" },
+        { "name": "BSD License", "value": "bsd" },
+        { "name": "Apache License, Version 2.0", "value": "apache2" },
+        { "name": "GNU General Public License version 3", "value": "gnu3" }
+      ],
+      "default": "MIT"
+    }
+  ],
+  "actions": [
+    {
+      "type": "template",
+      "name": "Generate Licence",
+      "source": "{{toLowerCase LicenceType}}.md.hbs",
+      "target": "LICENCE.md"
+    }
+  ]
+}

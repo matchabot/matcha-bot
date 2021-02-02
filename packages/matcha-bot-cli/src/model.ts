@@ -1,21 +1,48 @@
+/**
+ * Possible types accept as input type
+ */
 export type ArgumentType = "string" | "number" | "path" | "list" | "password"
 
+/**
+ * Value in a list
+ */
 export interface IChoiceValue {
   name: string
   value: unknown
 }
 
+/**
+ * Command argument
+ */
 export type Argument = {
+  /**
+   * Kind of argument (string | number | path )
+   */
   type: ArgumentType
+  /**
+   * Variable name
+   */
   name: string
+  /**
+   * Alias
+   */
   alias?: string
+  /**
+   * Description
+   */
   description?: string
+  /**
+   * Default value, this value will be interpreted and can contain variables evaluation formula
+   */
   default: string
+  /**
+   * A list of possible values
+   */
   choices?: (string | IChoiceValue)[]
 }
 
 /**
- * A command
+ * A command action step
  */
 export type Action = {
   name?: string
@@ -23,6 +50,9 @@ export type Action = {
   args?: Argument[]
 }
 
+/**
+ * A template action the source file will interpreted
+ */
 export type ActionTemplate = {
   type: "template"
   /**
@@ -35,6 +65,9 @@ export type ActionTemplate = {
   target: string
 }
 
+/**
+ * A copy action
+ */
 export type ActionCopy = {
   type: "copy"
   /**
@@ -47,6 +80,9 @@ export type ActionCopy = {
   target: string
 }
 
+/**
+ * A copy of the directory source to target
+ */
 export type ActionCopyDirectory = {
   type: "copy-directory"
   /**
@@ -59,6 +95,9 @@ export type ActionCopyDirectory = {
   target: string
 }
 
+/**
+ * An intelligent copy of a directory with template evaluation
+ */
 export type ActionTemplateDirectory = {
   type: "template-directory"
   /**
@@ -72,6 +111,7 @@ export type ActionTemplateDirectory = {
 }
 
 /**
+ * Possible actions
  */
 export type ActionGenerate =
   | ActionTemplate
@@ -88,14 +128,34 @@ export type Command = {
   templateDir?: string
 }
 
+/**
+ * A dictionary of commands
+ */
 export type Commands = Record<string, Command>
 
 /**
- * Matcha Configuration
+ * A generator
+ */
+
+export type MatchaGenerator = {
+  name: string
+  description?: string
+  version: string
+  filePath: string
+  commands: Commands
+}
+
+/**
+ * A dictionary of generators
+ */
+export type MatchaGenerators = Record<string, MatchaGenerator>
+
+/**
+ * The root object for a Matcha Configuration
  */
 export type Configuration = {
   outputDirectory: string
-  commands: Commands
+  generators: MatchaGenerators
 }
 
 /**

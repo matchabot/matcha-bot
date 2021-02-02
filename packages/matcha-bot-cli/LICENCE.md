@@ -1,6 +1,6 @@
 MIT License
 
-MatchaBOT.
+MatchaBot.
 
 
 Copyright (c) 2021 - Raphaël MANSUY

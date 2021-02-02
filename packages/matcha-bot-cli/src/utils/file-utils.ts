@@ -90,6 +90,17 @@ export const findFirstExisting = (filePaths: ReadonlyArray<string>) => {
   return resultFile
 }
 
+export const findFirstRecFile = (filePath: string) => {
+
+  if(path.resolve(filePath,".."))
+
+  if (!existsSync(filePath)) {
+    return filePath
+  }
+
+  const parentFilePath = path.join("../",filePath)
+}
+
 /**
  *
  * Return the localPath from a full Path
