@@ -2,32 +2,43 @@
 
 ## Introduction
 
-🍵 **MatchaBot** is a code generator written in TypeScript with NodeJS.
+🍵 **MatchaBot** is a code generator written in TypeScript.
 
 ![MatchaBot](packages/matcha-bot-cli/doc/matchabot.gif)
 
+You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
 
-You can use **matchabot** to create an entire project, or to generate code inside an existing project in a consistent way. This project has been created to offer a "Ruby on Rail" like programming experience with "React Projects".
+This project has been created to offer a "Ruby on Rail" like programming experience with "React Projects".
 
 ### Features
 
 - ✅ Easy to use **in project** generator
-- ✅ [HandleBars](https://handlebarsjs.com/) support
-- ✅ Powerfull command line support
+- ✅ You can create your **own generator by project**, or use a **global templates repository**
+- ✅ Templating language support: [HandleBars](https://handlebarsjs.com/) and [EJS](https://ejs.co/)
+- ✅ Powerfull command line support: automatic **CLI arguments** and **automatic prompts** for missing arguments
+- ✅ Simplified workflow to create **new generators** for you **own project**
+- ✅ Debug mode
+- ✅ **Add new file** to your project
+- ✅ **Modify existing files**
+- ✅ You can generate **any kind of files/projects** (NodeJS, typescript, Javascript, SQL, C++, C, Go, ...)
 
 ### Benefits
 
-- ✅ Simple
-- ✅ Boost your productivty
+- ✅ **Simple** and **Powerfull**
+- ✅ **Save time** and **Boost** your **productivty**
+- ✅ Enforce a **consistent** project structure
+- ✅ **Easier** team onboarding with a codified best practices stored inside each project
 - ✅ Fun to use 🦄
 
 ### Key concepts
 
-- 👉 A code generator is identified by a **command**.
-- 👉 A **command** takes a list of **arguments** as input and execute a list of **generator actions** ⚙️.
+- 👉 A **code generator** is identified by a **name**
+- 👉 A **code generator** offer one or more **commands**
+- 👉 A **command** takes a list of **arguments** as input and execute a list of **actions** ⚙️.
 - 👉 ️️A **generator action** is specified by one or multiple **template** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
-- 👉 The generators definitions are stored inside your project inside the **`./.machatbot`** directory
-- 👉 Each **command** is defined by a **`matcha.json`** file inside the **`./.machatbot`** directory
+- 👉 The generators definitions are stored inside your project inside the **`./_machatbot`** directory
+- 👉 **commands** are defined by a **`matcha.json`** file inside the **`./_machatbot`** directory
+
 
 ### How to start
 
@@ -38,6 +49,13 @@ Execute the following command at the root of your project.
 ```bash
 yarn add matchabot --dev
 ```
+
+or
+
+```bash
+npm install matchabot --save-dev
+```
+
 
 **Initialise matchabot**
 

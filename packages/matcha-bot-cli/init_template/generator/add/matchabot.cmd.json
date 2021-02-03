@@ -1,6 +1,6 @@
 {
   "name": "add-command",
-  "description": "add a new command to your generator",
+  "description": "⚙️ add a new command to your generator",
   "version": "1.0.0",
   "args": [
     {
@@ -25,7 +25,7 @@
       "type": "template",
       "name": "Generate a matcha.json file",
       "source": "matcha.json.hbs",
-      "target": "./.matchabot/commands/{{kebabCase CommandName}}/matcha.json"
+      "target": "./.matchabot/commands/{{kebabCase CommandName}}/matchabot.cmd.json"
     },
     {
       "type": "copy",

@@ -1,6 +1,6 @@
 {
   "name": "create-react-component",
-  "description": "generate a Styled React Component, and an associated story",
+  "description": "⚙️ generate a Styled React Component, and an associated story",
   "version": "1.0.0",
   "args": [
     {
