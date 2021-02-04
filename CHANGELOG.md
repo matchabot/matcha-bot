@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.5
+
+Add support to EJS templating
+
 ## 0.3.2
 
 Fix display console information
