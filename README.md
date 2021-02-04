@@ -8,9 +8,9 @@
 
 You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
 
-This project has been created to offer a "Ruby on Rail" like programming experience with "React Projects".
+This tool has been created to offer a "Ruby on Rail" like programming experience with any projects: React / Vue / Angular, NextJS / Gatsby, etc ...
 
-### Features
+## Features
 
 - ✅ Easy to use **in project** generator
 - ✅ You can create your **own generator by project**, or use a **global templates repository**
@@ -22,27 +22,26 @@ This project has been created to offer a "Ruby on Rail" like programming experie
 - ✅ **Modify existing files**
 - ✅ You can generate **any kind of files/projects** (NodeJS, typescript, Javascript, SQL, C++, C, Go, ...)
 
-### Benefits
+## Benefits
 
 - ✅ **Simple** and **Powerfull**
 - ✅ **Save time** and **Boost** your **productivty**
 - ✅ Enforce a **consistent** project structure
-- ✅ **Easier** team onboarding with a codified best practices stored inside each project
+- ✅ **Easier** team onboarding with a **codified** best practices **stored inside** each project
 - ✅ Fun to use 🦄
 
-### Key concepts
+## Key concepts
 
 - 👉 A **code generator** is identified by a **name**
 - 👉 A **code generator** offer one or more **commands**
 - 👉 A **command** takes a list of **arguments** as input and execute a list of **actions** ⚙️.
 - 👉 ️️A **generator action** is specified by one or multiple **template** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
-- 👉 The generators definitions are stored inside your project inside the **`./_machatbot`** directory
-- 👉 **commands** are defined by a **`matcha.json`** file inside the **`./_machatbot`** directory
+- 👉 The generators definition are stored inside your project inside the **`./_machatbot`** directory as a subdirectory
+- 👉 **commands** are defined by a **`matchabot.cmd.json`** file inside the **`./_machatbot/--generator-name--`** directory
 
+## How to start 👉
 
-### How to start
-
-**Add matchabot to your project**
+### 1️⃣ Add matchabot to your project
 
 Execute the following command at the root of your project.
 
@@ -56,8 +55,7 @@ or
 npm install matchabot --save-dev
 ```
 
-
-**Initialise matchabot**
+### 2️⃣ Initialise matchabot\*\*
 
 Execute the following command at the root of your project.
 
@@ -65,22 +63,63 @@ Execute the following command at the root of your project.
 matchabot init
 ```
 
-👉 This command create a local directory **`./.matchabot`** inside your project
+👉 This command create a local directory **`./.matchabot`** inside your current project directory
+
+**Content of \_matchabot**
 
 ```bash
-./.matchabot
-└── commands
-    ├── add-command
-    ├── add-licence
+_matchabot
+├── license
+│   ├── add
+│   │   ├── apache2.md.hbs
+│   │   ├── bsd.md.hbs
+│   │   ├── gnu3.md.hbs
+│   │   ├── matchabot.cmd.json
+│   │   └── mit.md.hbs
+│   └── matchabot.json
+└── react-app
+    ├── create-app
+    │   ├── matchabot.cmd.json
+    │   └── template
+    ├── create-component
+    │   ├── component.tsx.hbs
+    │   ├── matchabot.cmd.json
+    │   ├── stories.tsx.hbs
+    │   └── style.tsx.hbs
+    └── matchabot.json
 ```
 
-The **command** directory contains a list of subdirectory. Each subdirectory contains a **matcha.json** file that defines the **command** and a list of asociated **templates**.
+In this example, the `_matchabot` is composed of 2 **generators**
 
-Example **`./.matchabot/add-licence/matcha.json`**:
+- licence
+- react-app
+
+Each **generator** is defined by a `matchabot.json`file
+
+Example for `license`
 
 ```json
 {
-  "name": "add-licence",
+  "name": "license",
+  "description": "📃 Add licences to your project",
+  "version": "1.0.0"
+}
+```
+
+Each subdirectory contains a definition of a **command** asociated with a **generator**
+
+For the `react-app`generator we have 2 commands:
+
+- `create-app`
+- `create-component`
+
+Each subdirectory contains a **matchabot.cmd.json** file that defines the \*_commands_ and list of actions to perform.
+
+Example **`./.matchabot/license/add/matchabot.cmd.json`**:
+
+```json
+{
+  "name": "add",
   "description": "add a licence file to your project",
   "version": "1.0.0",
   "args": [
@@ -119,7 +158,38 @@ Example **`./.matchabot/add-licence/matcha.json`**:
 }
 ```
 
-**List availables commands**
+#### command arguments
+
+In this example, the `args` array contains a list of arguments (variables) that will be used in the templates.
+
+**Example of template**
+
+```hbs
+MIT License
+
+{{ProgramDescription}}.
+
+
+Copyright (c) {{formatDate currentDate "YYYY"}} - {{CopyRightsHolder}}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+```
+
+### command actions
+
+In this example with only have 1 action: select a template from `"source": "{{toLowerCase LicenceType}}.md.hbs"` and generates a file `"target": "LICENCE.md"`
 
 ```bash
 matchabot list
@@ -134,27 +204,81 @@ matchabot list
  | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_
  |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
 
-Version: 0.2.0 🍵
+Version: 0.3.0 🍵
 
-┌─────────┬──────────────────────────┬──────────────────────────────────────────────────────────────┬─────────┬────────────────────────────────────────────────┐
-│ (index) │           name           │                         description                          │ version │                    location                    │
-├─────────┼──────────────────────────┼──────────────────────────────────────────────────────────────┼─────────┼────────────────────────────────────────────────┤
-│    0    │      'add-command'       │       'add a new command to the .matchabot directory'        │ '1.0.0' │      './.matchabot/commands/add-command'       │
-│    1    │      'add-licence'       │             'add a licence file to your project'             │ '1.0.0' │      './.matchabot/commands/add-licence'       │
-│    2    │    'create-react-app'    │               'create a typescript react app'                │ '1.0.0' │    './.matchabot/commands/create-react-app'    │
-│    3    │ 'create-react-component' │ 'generate a Styled React Component, and an associated story' │ '1.0.0' │ './.matchabot/commands/create-react-component' │
-└─────────┴──────────────────────────┴──────────────────────────────────────────────────────────────┴─────────┴────────────────────────────────────────────────┘
+Availables generators
+---------------------
+
+┌────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┬──────────┬────────────────────────────────────────────────────────────────────────────────┐
+│ name               │ description                                                                                                            │ version  │ location                                                                       │
+├────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ generator          │ 🤖 Built-in generator of generators: create your own generators                                                        │ 1.0.0    │ ./_matchabot/generator                                                         │
+├────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ license            │ 📃 Add licences to your project                                                                                        │ 1.0.0    │ ./_matchabot/license                                                           │
+├────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ react-app          │ 🚀 react app generator                                                                                                 │ 1.0.0    │ ./_matchabot/react-app                                                         │
+└────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴──────────┴────────────────────────────────────────────────────────────────────────────────┘
 
 ```
 
-**Execute a command**
+### 4️⃣ List available commands for a generator
+
+**Lists all the commands of the generator `react-app`**
 
 ```bash
-matchabot add-licence
+matchabot react-app list
 ```
 
-**Result:**
+**Result**
 
-![Resut](./packages/matcha-bot-cli/doc/01.png)
+```bash
+  __  __       _       _             ____        _   
+ |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_ 
+ | |\/| |/ _` | __/ __| '_ \ / _` | |  _ \ / _ \| __|
+ | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_ 
+ |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
+                                                     
+Version: 0.3.0 🍵
 
-##
+Availables command(s) for react-app
+-----------------------------------
+
+┌────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┬──────────┬────────────────────────────────────────────────────────────────────────────────┐
+│ name                                   │ description                                                                                                            │ version  │ location                                                                       │
+├────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ create-app                             │ create a typescript react app                                                                                          │ 1.0.0    │ ./_matchabot/react-app/create-app                                              │
+├────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┼──────────┼────────────────────────────────────────────────────────────────────────────────┤
+│ create-component                       │ generate a Styled React Component, and an associated story                                                             │ 1.0.0    │ ./_matchabot/react-app/create-component                                        │
+└────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴──────────┴────────────────────────────────────────────────────────────────────────────────┘
+
+```
+
+### 5️⃣ Use a generator
+
+Creation of a React Application using a template generator
+
+```bash
+matchabot react-app create-app
+````
+
+**Result** 
+
+```bash
+  __  __       _       _             ____        _   
+ |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_ 
+ | |\/| |/ _` | __/ __| '_ \ / _` | |  _ \ / _ \| __|
+ | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_ 
+ |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
+                                                     
+Version: 0.3.0 🍵
+
+? ApplicationName MyReactApp
+
+🍵 Generating files ...
+
+
+👉 Created files 
+```
+
+
+

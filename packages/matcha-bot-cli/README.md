@@ -4,7 +4,6 @@
 
 🍵 **MatchaBot** is a code generator written in TypeScript.
 
-![MatchaBot](doc/matchabot.gif)
 
 You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
 
