@@ -4,7 +4,6 @@
 
 🍵 **MatchaBot** is a code generator written in TypeScript.
 
-
 You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
 
 This tool has been created to offer a "Ruby on Rail" like programming experience with any projects: React / Vue / Angular, NextJS / Gatsby, etc ...
@@ -40,7 +39,7 @@ This tool has been created to offer a "Ruby on Rail" like programming experience
 
 ## How to start 👉
 
-### 1️⃣ Add matchabot to your project
+### 1 - Add matchabot to your project
 
 Execute the following command at the root of your project.
 
@@ -54,7 +53,7 @@ or
 npm install matchabot --save-dev
 ```
 
-### 2️⃣ Initialise matchabot\*\*
+### 2️ - Initialise matchabot
 
 Execute the following command at the root of your project.
 
@@ -190,11 +189,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
 In this example with only have 1 action: select a template from `"source": "{{toLowerCase LicenceType}}.md.hbs"` and generates a file `"target": "LICENCE.md"`
 
+
+## 3 - List all available generators
+
 ```bash
 matchabot list
 ```
 
-👉 This command gives the list of defined commands
+👉 This command gives the list of defined generators
 
 ```bash
   __  __       _       _             ____        _
@@ -220,7 +222,7 @@ Availables generators
 
 ```
 
-### 4️⃣ List available commands for a generator
+### 4 - List available commands for a generator
 
 **Lists all the commands of the generator `react-app`**
 
@@ -231,12 +233,12 @@ matchabot react-app list
 **Result**
 
 ```bash
-  __  __       _       _             ____        _   
- |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_ 
+  __  __       _       _             ____        _
+ |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_
  | |\/| |/ _` | __/ __| '_ \ / _` | |  _ \ / _ \| __|
- | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_ 
+ | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_
  |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
-                                                     
+
 Version: 0.3.0 🍵
 
 Availables command(s) for react-app
@@ -252,23 +254,23 @@ Availables command(s) for react-app
 
 ```
 
-### 5️⃣ Use a generator
+### 5 - Use a generator to scaffold a project
 
 Creation of a React Application using a template generator
 
 ```bash
 matchabot react-app create-app
-````
+```
 
-**Result** 
+**Result**
 
 ```bash
-  __  __       _       _             ____        _   
- |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_ 
+  __  __       _       _             ____        _
+ |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_
  | |\/| |/ _` | __/ __| '_ \ / _` | |  _ \ / _ \| __|
- | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_ 
+ | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_
  |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
-                                                     
+
 Version: 0.3.0 🍵
 
 ? ApplicationName MyReactApp
@@ -276,8 +278,5 @@ Version: 0.3.0 🍵
 🍵 Generating files ...
 
 
-👉 Created files 
+👉 Created files
 ```
-
-
-
