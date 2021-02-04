@@ -2,8 +2,9 @@ import { recordToArray } from "./commands-util"
 import { MatchaGenerators } from "../model"
 import { configDir } from "../config/config-reader"
 import Table from "cli-table"
-
+import path from "path"
 import c from "chalk"
+import { localPath } from "../utils/file-utils"
 
 const log = console.log
 
@@ -21,16 +22,17 @@ export const listGenerators = (generators: MatchaGenerators) => {
     .map((generator) => ({
       name: generator.name,
       description: generator.description ?? "",
-      version: generator.version ?? ""
+      version: generator.version ?? "",
+      location: localPath(path.dirname(generator.filePath))
     }))
     .sort((a, b) => a.name.localeCompare(b.name))
 
   const displayTableArray = generatorTable.reduce((acc, entry) => {
-    const { description, name, version } = entry
-    const row: Array<string> = [name, description, version]
+    const { description, name, version, location } = entry
+    const row: Array<string> = [name, description, version, location]
     acc.push(row)
     return acc
-  }, new Table({ head: ["name", "description", "version"], style: { head: ["green"] }, colWidths: [20, 120, 10], colAligns: ["left", "left", "left"] }))
+  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [20, 120, 10, 80], colAligns: ["left", "left", "left"] }))
 
   if (generatorTable.length === 0) {
     log("\r\n")
@@ -43,8 +45,10 @@ export const listGenerators = (generators: MatchaGenerators) => {
     log(`👉 to create a template directory '${configDir}}'`)
     log("\r\n")
   } else {
-    log(c.greenBright("Availables generators"))
-    log(c.greenBright("---------------------"))
+    const title = `Availables generators`
+    const titleLine = Array(title.length + 1).join("-")
+    log(c.greenBright(title))
+    log(c.greenBright(titleLine))
     log("")
     log(displayTableArray.toString())
     log("")
