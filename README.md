@@ -4,8 +4,6 @@
 
 🍵 **MatchaBot** is a code generator written in TypeScript.
 
-![MatchaBot](packages/matcha-bot-cli/doc/matchabot.gif)
-
 You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
 
 This tool has been created to offer a "Ruby on Rail" like programming experience with any projects: React / Vue / Angular, NextJS / Gatsby, etc ...
@@ -39,9 +37,9 @@ This tool has been created to offer a "Ruby on Rail" like programming experience
 - 👉 The generators definition are stored inside your project inside the **`./_machatbot`** directory as a subdirectory
 - 👉 **commands** are defined by a **`matchabot.cmd.json`** file inside the **`./_machatbot/--generator-name--`** directory
 
-## How to start 👉
+## 👉 How to start 
 
-### 1️⃣ Add matchabot to your project
+### 1 - Add matchabot to your project
 
 Execute the following command at the root of your project.
 
@@ -55,7 +53,14 @@ or
 npm install matchabot --save-dev
 ```
 
-### 2️⃣ Initialise matchabot
+💡 matchabot can be installed globally with
+
+```bash
+npm install -g matchabot
+```
+
+
+### 2️ - Initialise matchabot
 
 Execute the following command at the root of your project.
 
@@ -113,7 +118,7 @@ For the `react-app`generator we have 2 commands:
 - `create-app`
 - `create-component`
 
-Each subdirectory contains a **matchabot.cmd.json** file that defines the \*_commands_ and list of actions to perform.
+Each subdirectory contains a **matchabot.cmd.json** file that defines the **commands** and list of **actions** to perform.
 
 Example **`./.matchabot/license/add/matchabot.cmd.json`**:
 
@@ -162,7 +167,7 @@ Example **`./.matchabot/license/add/matchabot.cmd.json`**:
 
 In this example, the `args` array contains a list of arguments (variables) that will be used in the templates.
 
-**Example of template**
+**Example of template [Handlebar syntax](https://handlebarsjs.com/)**
 
 ```hbs
 MIT License
@@ -191,11 +196,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
 In this example with only have 1 action: select a template from `"source": "{{toLowerCase LicenceType}}.md.hbs"` and generates a file `"target": "LICENCE.md"`
 
+
+## 3 - List all available generators
+
 ```bash
 matchabot list
 ```
 
-👉 This command gives the list of defined commands
+👉 This command gives the list of defined generators
 
 ```bash
   __  __       _       _             ____        _
@@ -221,7 +229,7 @@ Availables generators
 
 ```
 
-### 4️⃣ List available commands for a generator
+### 4 - List available commands for a generator
 
 **Lists all the commands of the generator `react-app`**
 
@@ -253,7 +261,7 @@ Availables command(s) for react-app
 
 ```
 
-### 5️⃣ Use a generator
+### 5 - Use a generator to scaffold a project
 
 Creation of a React Application using a template generator
 
