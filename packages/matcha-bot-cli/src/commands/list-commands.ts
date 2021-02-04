@@ -31,7 +31,7 @@ export const listCommands = (generator: MatchaGenerator) => {
     const row: Array<string> = [name, description, version, location]
     acc.push(row)
     return acc
-  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [20, 120, 10, 80], colAligns: ["left", "left", "left"] }))
+  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [40, 120, 10, 80], colAligns: ["left", "left", "left"] }))
 
   if (commandTable.length === 0) {
     log("\r\n")
@@ -39,7 +39,7 @@ export const listCommands = (generator: MatchaGenerator) => {
     log("\r\n")
   } else {
     const title = `Availables command(s) for ${generator.name}`
-    const titleLine = Array(title.length+1).join("-")
+    const titleLine = Array(title.length + 1).join("-")
     log(c.greenBright(title))
     log(c.greenBright(titleLine))
     log("")
