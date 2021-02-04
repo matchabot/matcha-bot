@@ -55,7 +55,7 @@ or
 npm install matchabot --save-dev
 ```
 
-### 2️⃣ Initialise matchabot\*\*
+### 2️⃣ Initialise matchabot
 
 Execute the following command at the root of your project.
 
@@ -232,12 +232,12 @@ matchabot react-app list
 **Result**
 
 ```bash
-  __  __       _       _             ____        _   
- |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_ 
+  __  __       _       _             ____        _
+ |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_
  | |\/| |/ _` | __/ __| '_ \ / _` | |  _ \ / _ \| __|
- | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_ 
+ | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_
  |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
-                                                     
+
 Version: 0.3.0 🍵
 
 Availables command(s) for react-app
@@ -259,17 +259,17 @@ Creation of a React Application using a template generator
 
 ```bash
 matchabot react-app create-app
-````
+```
 
-**Result** 
+**Result**
 
 ```bash
-  __  __       _       _             ____        _   
- |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_ 
+  __  __       _       _             ____        _
+ |  \/  | __ _| |_ ___| |__   __ _  | __ )  ___ | |_
  | |\/| |/ _` | __/ __| '_ \ / _` | |  _ \ / _ \| __|
- | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_ 
+ | |  | | (_| | || (__| | | | (_| | | |_) | (_) | |_
  |_|  |_|\__,_|\__\___|_| |_|\__,_| |____/ \___/ \__|
-                                                     
+
 Version: 0.3.0 🍵
 
 ? ApplicationName MyReactApp
@@ -277,8 +277,5 @@ Version: 0.3.0 🍵
 🍵 Generating files ...
 
 
-👉 Created files 
+👉 Created files
 ```
-
-
-

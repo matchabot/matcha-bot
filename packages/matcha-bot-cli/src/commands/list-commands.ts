@@ -31,7 +31,7 @@ export const listCommands = (generator: MatchaGenerator) => {
     const row: Array<string> = [name, description, version, location]
     acc.push(row)
     return acc
-  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [40, 120, 10, 80], colAligns: ["left", "left", "left"] }))
+  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [30, 60, 10, 60], colAligns: ["left", "left", "left"] }))
 
   if (commandTable.length === 0) {
     log("\r\n")

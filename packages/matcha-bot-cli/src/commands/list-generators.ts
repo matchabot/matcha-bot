@@ -32,7 +32,7 @@ export const listGenerators = (generators: MatchaGenerators) => {
     const row: Array<string> = [name, description, version, location]
     acc.push(row)
     return acc
-  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [20, 120, 10, 80], colAligns: ["left", "left", "left"] }))
+  }, new Table({ head: ["name", "description", "version", "location"], style: { head: ["green"] }, colWidths: [20, 60, 10, 60], colAligns: ["left", "left", "left"] }))
 
   if (generatorTable.length === 0) {
     log("\r\n")
@@ -42,7 +42,7 @@ export const listGenerators = (generators: MatchaGenerators) => {
     log("----")
     log(c.green("$ matchabot init"))
     log("\r\n")
-    log(`👉 to create a template directory '${configDir}}'`)
+    log(`👉 to create a template directory '${configDir}'`)
     log("\r\n")
   } else {
     const title = `Availables generators`

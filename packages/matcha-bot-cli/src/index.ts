@@ -36,7 +36,7 @@ export const run = async () => {
     .version(version, "-v,--version", "output the current version")
     // Register a command that lists all availables commands
     .command("list")
-    .description("⚙️ list all available generators")
+    .description("👉 list all available generators")
     .action(() => listGenerators(config.generators))
   // Register init command => copy a starter directory called .matchabot
   program
