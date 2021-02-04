@@ -4,7 +4,6 @@ import commander, { program } from "commander"
 import { getSystemVariables } from "../template-generator/add-system-variables"
 import path from "path"
 import { executeCommands } from "./commands-execute"
-import c from "chalk"
 import { listCommands } from "./list-commands"
 const log = console.log
 
@@ -16,7 +15,7 @@ export const registerCommands = (
     const cmd = parentCommand.command(command.name)
 
     // Force option
-    cmd.option("--force", "force overwrite file if file already exists")
+    cmd.option("--force", "force overwrite file if the file already exists")
     // Debug mode
     cmd.option(
       "--debug",
