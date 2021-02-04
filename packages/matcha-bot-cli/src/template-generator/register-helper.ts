@@ -14,8 +14,11 @@ export interface HelperDelegate {
   ): any
 }
 
+export const EjsContext: Record<string, unknown> = {}
+
 export const registerHelper = function (name: string, fn: HelperDelegate) {
   Handlebars.registerHelper(name, fn)
+  EjsContext[name] = fn
 }
 
 export const registerHelpers = () => {

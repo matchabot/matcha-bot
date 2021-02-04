@@ -29,10 +29,12 @@
     "make"
   ],
   "dependencies": {
+    "@types/ejs": "^3.0.5",
     "chalk": "^4.1.0",
     "cli-table": "^0.3.4",
     "commander": "^7.0.0",
     "debug": "^4.3.1",
+    "ejs": "^3.1.5",
     "fast-glob": "^3.2.5",
     "figlet": "^1.5.0",
     "file-type": "^16.2.0",
