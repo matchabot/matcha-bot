@@ -1,5 +1,9 @@
 # MatchaBot
 
+
+![Robot](doc/robot.png)
+
+
 ## Introduction
 
 🍵 **MatchaBot** is a code generator written in TypeScript.
