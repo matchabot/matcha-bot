@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] generator
 - [ ] Implement condition in action
 - [ ] Save input as parameters
 - [ ] Implement modify file
