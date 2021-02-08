@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "gatsby": "^2.32.3",
+    "matchabot": "^0.3.6",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "smooth-doc": "^5.0.4"
+  },
+  "devDependencies": {
+    "matchabot": "^0.3.6"
   }
 }
