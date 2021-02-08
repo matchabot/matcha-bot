@@ -1,8 +1,6 @@
 # MatchaBot
 
-
-![Robot](doc/robot.png)
-
+![Robot](https://www.matchabot.site/static/adea4702d2b8d591adf406a3cd842e36/logo-nav-light.svg)
 
 ## Introduction
 
@@ -11,6 +9,8 @@
 You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
 
 This tool has been created to offer a "Ruby on Rail" like programming experience with any projects: React / Vue / Angular, NextJS / Gatsby, etc ...
+
+The complete documentation of the project is available at [https://www.matchabot.site/](https://www.matchabot.site/)
 
 ## Features
 
@@ -65,7 +65,7 @@ Execute the following command at the root of your project.
 matchabot init
 ```
 
-👉 This command create a local directory **`./.matchabot`** inside your current project directory
+👉 This command create a local directory **`./_matchabot`** inside your current project directory
 
 **Content of \_matchabot**
 
@@ -192,7 +192,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 ### command actions
 
 In this example with only have 1 action: select a template from `"source": "{{toLowerCase LicenceType}}.md.hbs"` and generates a file `"target": "LICENCE.md"`
-
 
 ## 3 - List all available generators
 
