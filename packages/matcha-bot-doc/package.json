@@ -1,7 +1,7 @@
 {
-  "name": "smooth-doc-starter",
+  "name": "matchabotdoc",
   "version": "0.0.0",
-  "private": true,
+  "private": "false",
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
