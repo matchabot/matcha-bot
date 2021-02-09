@@ -1,39 +1,90 @@
 ---
-title: What is MatchaBot # Title of your page
+title: What is MatchaBot ? # Title of your page
 slug: /docs/introduction/getting-started # Slug of your page (uses file name as default)
 section: Introduction # Sidebar navigation group title
 ---
 
+
+
 # Overview
 
-Getting started with MatchaBot.
+Getting started with MatchaBot
 
-## What is MatchaBot
 
-MatchaBot is a code generator. Creating boilerplate code is a waste of time ⏰.
+## What is MatchaBot ?
 
-🏗 MatchaBot will **increase your productivity** by generating files, components and directories in a systematic way.
+> ⏰ Creating boilerplate code is a waste of time.
 
-## Why I created it ?
+👉 As a code generator **MatchaBot** will increase your productivity by generating files, components, and directories from answers to a few questions.
 
-`create-react-app` includes a code generator to create the first version of your application, but it will not offer the possibility to add new files to a project.
+## 🙋 Why did I create it ?
 
-Coding includes a lot of repeative tasks.
+`"Create-react-app"` includes a code generator to create the first version of your application, but it will not offer the possibility to add new files to a project.
 
-Fo example, when I generate a **react component** I also need to create a corresponding **unit test**, and **storybook**. I want also to enforce a certain component directory structure in the project directory and apply some navigation conventions.
+Coding includes a lot of repetitive tasks.
 
-I started to develop **code snippets** with a produtivity tool such as [TextExpander](https://textexpander.com/), it was great to create small chunks of code, but I felt frustated very quickly 😖.
+For example, when I generate a React component I need to create a corresponding unit test, and a storybook. 
 
-- A code snippets expander doesn't offer a way **to generate multiple files or a directory structure**
-- The snippets lives outside my project and it's **difficult to share** with my team
+I want also to enforce a certain directory structure in my project directory and I want to apply naming conventions.
+
+I started to develop code snippets with a productivity tool such as [TextExpander](https://textexpander.com/) o [VSCode Snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets), it was great to create small chunks of code, but I felt frustrated very quickly 😖:
+
+
+
+*   A code snippets expander doesn't offer a way to generate multiple files or a complete directory structure
+*   The snippets live outside my project, and it's difficult to share them with my team
+*   Versioning is a pain
 
 Then I started to search tools to create generators, I found 3 candidates:
 
-- [Yeoman](https://yeoman.io/)
-- [Polp](https://plopjs.com/)
-- [Hygen](https://www.hygen.io/)
 
 
-## What are the differnces with other code generators
+*   [Yeoman](https://yeoman.io/)
+*   [PolpJS](https://plopjs.com/)
+*   [Hygen](https://www.hygen.io/)
 
-## Getting started
+
+## How MatchaBot compares with existing generators ?
+
+### Yeoman 
+
+[Yeoman](https://en.wikipedia.org/wiki/Yeoman_(software)) is a command line oriented scaffolding tool written with [Node.js](https://nodejs.org/) that was introduced at [Google/IO in 2012](https://www.youtube.com/watch?v=Mk-tFn2Ix6g). Thanks to the concept of “modular generators” inspired by “Ruby On Rail”, Yeoman gives access to more [9400 generators](https://yeoman.io/generators/) that helps you to:
+
+
+*   kick-start the first version of your project
+*   add new components
+*   perform actions such as linting, testing, formatting
+
+### PolpJS
+
+[PolpJS](https://plopjs.com/) is a JavaScript library that leverages [inquirer](https://www.npmjs.com/package/inquirer) and [handlebars](https://handlebarsjs.com/) : you add PolpJS as development dependency  of your project and in a few minutes you can create your own generator thanks to JavaScript. “Always in Synch” is the selling point of PlopJS: by including code generators directly in the project code base everyone gets the latest version with a “pull command”. PlopJS is also very flexible because a generator is basically a JavaScript/Typescript library.
+
+### Hygen
+
+[Hygen](https://www.hygen.io/) is a simple CLI tool that allow you to create your own generator. Like PlopJS:  generators live directly in the codebase of your project. For Hygen a generator is a set of template files written with [EJS](https://ejs.co/). A template file includes a “[frontmatter header](https://jekyllrb.com/docs/front-matter/)” and EJS template. The frontmatter defines the variable or parameters used in the EJS template. Hygen is easy to start with. A generator can include multiple commands to add components or modify files. Generators are self-contained and folder structure makes up the command structure.
+
+## MatchaBot approach 
+
+[MatchaBot](https://www.matchabot.site) is inspired by these 3 approaches and try to take the best of each.
+
+
+
+*   Generators live in the folder structure of a project _matchabot
+*   MatchaBot does not have opinion what “template” language to choose: at the current stage of the project we support Handlebars and EJS
+*   A generator is defined by a folder inside the _matchabot directory
+    *   A machabot.json defines the name and the description of the generator
+    *   A generator can include one or multiple commands: commands are defined as subdirectories, each command is defined by a file matchabot.cmd.json at the root of each command directory
+    *   A command possesses a set of parameters and a list of actions to perform
+
+With MatchaBot you are free to choose the approach proposed by Hygen where the template structure defines the list of actions to perform, or you can precisely define each actions in the machabot.cmd.json
+
+
+## 🚀 Product roadmap 
+
+
+*   Integrate code modification functionalities  thanks to [codemods](https://github.com/facebook/codemod) and [jscodeshift](https://github.com/serapath/knowledge/blob/master/javascript/reference/ast/jscodeshift.md)
+*   Create an exchange platform of generators such as Yeoman to share best practices
+*   Develop a VSCode plugin to execute a generator or a command directly from Visual Studio Code
+*   Integrate 
+
+           
