@@ -19,6 +19,9 @@ module.exports = {
         // The property ID; the tracking code won't be generated without it
         trackingId: "UA-189279883-1"
       }
+    },
+    {
+      resolve: "gatsby-plugin-sitemap"
     }
   ]
 }

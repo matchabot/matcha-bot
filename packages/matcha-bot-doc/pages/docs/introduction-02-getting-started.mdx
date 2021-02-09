@@ -1,49 +1,19 @@
-# MatchaBot
+---
+title: 👉 Getting started # Title of your page
+slug: /docs/introduction/getting-started # Slug of your page (uses file name as default)
+section: Introduction # Sidebar navigation group title
+order: 2 # Order
+---
 
-![Robot](https://www.matchabot.site/static/adea4702d2b8d591adf406a3cd842e36/logo-nav-light.svg)
+# Getting started
 
-## Introduction
+Install MatchaBot and run your first generator.
 
-**MatchaBot** is a code generator written in TypeScript.
-
-You can use **matchabot** to **create an entire project**, or to **generate code inside** an existing project in a consistent way.
-
-This tool has been created to offer a "Ruby on Rail" like programming experience with any projects: React / Vue / Angular, NextJS / Gatsby, etc ...
-
-The complete documentation of the project is available at [https://www.matchabot.site/](https://www.matchabot.site/)
-
-## Features
-
-- ✅ Easy to use **in project** generator
-- ✅ You can create your **own generator by project**, or use a **global templates repository**
-- ✅ Templating language support: [HandleBars](https://handlebarsjs.com/) and [EJS](https://ejs.co/)
-- ✅ Powerfull command line support: automatic **CLI arguments** and **automatic prompts** for missing arguments
-- ✅ Simplified workflow to create **new generators** for you **own project**
-- ✅ Debug mode
-- ✅ **Add new file** to your project
-- ✅ **Modify existing files**
-- ✅ You can generate **any kind of files/projects** (NodeJS, typescript, Javascript, SQL, C++, C, Go, ...)
-
-## Benefits
-
-- ✅ **Simple** and **Powerfull**
-- ✅ **Save time** and **Boost** your **productivty**
-- ✅ Enforce a **consistent** project structure
-- ✅ **Easier** team onboarding with a **codified** best practices **stored inside** each project
-- ✅ Fun to use 🦄
-
-## Key concepts
-
-- 👉 A **code generator** is identified by a **name**
-- 👉 A **code generator** offer one or more **commands**
-- 👉 A **command** takes a list of **arguments** as input and execute a list of **actions** ⚙️.
-- 👉 ️️A **generator action** is specified by one or multiple **template** written with a templating language such as [HandleBars](https://handlebarsjs.com/) or [EJS](https://ejs.co/)
-- 👉 The generators definition are stored inside your project inside the **`./_machatbot`** directory as a subdirectory
-- 👉 **commands** are defined by a **`matchabot.cmd.json`** file inside the **`./_machatbot/--generator-name--`** directory
-
-## 👉 How to start
+## How to start
 
 ### 1 - Add matchabot to your project
+
+> Pre-requisites: you have a in a directory that contains a `package.json` file.
 
 Execute the following command at the root of your project.
 
@@ -57,7 +27,7 @@ or
 npm install matchabot --save-dev
 ```
 
-💡 matchabot can be installed globally with
+**Matchabot** can be installed **globally** with
 
 ```bash
 npm install -g matchabot
@@ -104,7 +74,7 @@ In this example, the `_matchabot` is composed of 2 **generators**
 
 Each **generator** is defined by a `matchabot.json`file
 
-Example for `license`
+Example for `license` the `matchabot.json` looks like this:
 
 ```json
 {
@@ -113,8 +83,6 @@ Example for `license`
   "version": "1.0.0"
 }
 ```
-
-Each subdirectory contains a definition of a **command** asociated with a **generator**
 
 For the `react-app`generator we have 2 commands:
 
@@ -289,3 +257,5 @@ Version: 0.3.0 🍵
 
 👉 Created files
 ```
+
+

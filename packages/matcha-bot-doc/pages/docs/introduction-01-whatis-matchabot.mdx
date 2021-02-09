@@ -1,14 +1,13 @@
 ---
-title: What is MatchaBot ? # Title of your page
-slug: /docs/introduction/getting-started # Slug of your page (uses file name as default)
+title: 🙋‍♂️ What is MatchaBot ? # Title of your page
+slug: /docs/introduction/what-is-matchabot # Slug of your page (uses file name as default)
 section: Introduction # Sidebar navigation group title
+order: 1 # Order
 ---
-
-
 
 # Overview
 
-Getting started with MatchaBot
+MatchaBot
 
 
 ## What is MatchaBot ?
@@ -69,12 +68,12 @@ Then I started to search tools to create generators, I found 3 candidates:
 
 
 
-*   Generators live in the folder structure of a project _matchabot
+*   **Generators** live in the folder structure of a project in the **_matchabot** directory
 *   MatchaBot does not have opinion what “template” language to choose: at the current stage of the project we support Handlebars and EJS
-*   A generator is defined by a folder inside the _matchabot directory
-    *   A machabot.json defines the name and the description of the generator
-    *   A generator can include one or multiple commands: commands are defined as subdirectories, each command is defined by a file matchabot.cmd.json at the root of each command directory
-    *   A command possesses a set of parameters and a list of actions to perform
+*   A generator is defined by a folder inside the **_matchabot** directory
+    *   A **machabot.json** defines the name and the description of the generator
+    *   A **generator** can include one or multiple **commands**: **commands** are defined as subdirectories, each command is defined by a **matchabot.cmd.json** file at the root of each **command directory**
+    *   A **command** possesses a set of **parameters** and a **list of actions** to perform
 
 With MatchaBot you are free to choose the approach proposed by Hygen where the template structure defines the list of actions to perform, or you can precisely define each actions in the machabot.cmd.json
 
