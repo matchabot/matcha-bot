@@ -10,7 +10,7 @@ module.exports = {
         githubRepositoryURL: "https://github.com/matchabot/matcha-bot",
         description:
           "A powerful project code generator, simple and fun to use. Improve your daily productivity for your React, Gatsby and NextJS projects.",
-        siteUrl: "https://example.com"
+        siteUrl: "https://www.matchabot.site"
       }
     },
     {
