@@ -2,6 +2,9 @@
 
 ![Robot](https://www.matchabot.site/static/adea4702d2b8d591adf406a3cd842e36/logo-nav-light.svg)
 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1bfd33f9-1e36-43aa-b870-52ae38b29659/deploy-status)](https://app.netlify.com/sites/matchabot/deploys)
+
 ## Introduction
 
 **MatchaBot** is a code generator written in TypeScript.

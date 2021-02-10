@@ -6,6 +6,8 @@
 
 ## License
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1bfd33f9-1e36-43aa-b870-52ae38b29659/deploy-status)](https://app.netlify.com/sites/matchabot/deploys)
+
 Licensed under the MIT License, Copyright © 2020-present Greg Bergé.
 
 See [LICENSE](./LICENSE) for more information.
