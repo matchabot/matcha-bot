@@ -1,6 +1,6 @@
-import { Commands, Command, Argument, ArgumentType } from "../model"
-import { prompt } from "inquirer"
-import { executeTemplate } from "../template-generator/execute-template"
+import { Commands, Command, Argument, ArgumentType } from "../model";
+import { prompt } from "inquirer";
+import { executeTemplate } from "../template-generator/execute-template";
 
 /**
  * Map matchabot input type to inquirer input type
@@ -9,38 +9,38 @@ import { executeTemplate } from "../template-generator/execute-template"
 const getInputType = (inputType: ArgumentType) => {
   switch (inputType) {
     case "string":
-      return "input"
+      return "input";
     case "number":
-      return "number"
+      return "number";
     case "path":
-      return "path"
+      return "path";
     case "list":
-      return "list"
+      return "list";
     case "password":
-      return "password"
+      return "password";
     default:
-      return "input"
+      return "input";
   }
-}
+};
 
 export const recordToArray = <T>(dic: Record<string, T>) => {
-  return Object.keys(dic).map((k) => dic[k])
-}
+  return Object.keys(dic).map((k) => dic[k]);
+};
 
 /**
  * Get arguments for a command
  * @param command
  */
 export const getArgs = (command: Command) => {
-  return command.args
-}
+  return command.args;
+};
 
 /**
  * Returns commands names from a commands object
  * @param commands
  */
 export const getCommandNames = (commands: Commands) =>
-  recordToArray(commands).map((c) => c.name)
+  recordToArray(commands).map((c) => c.name);
 
 /**
  * Prepare a list of questions from a list of arguments
@@ -56,15 +56,15 @@ export const askCommandArgs = async (
     name: arg.name,
     message: arg.description ?? `${arg.name}`,
     default: arg.default ? executeTemplate(arg.default, context) : arg.default, // Interpret default value as an expression
-    choices: arg.choices
-  }))
+    choices: arg.choices,
+  }));
 
-  let responses: Record<string, unknown> = {}
+  let responses: Record<string, unknown> = {};
 
   for (const question of questions) {
-    const response = await prompt([question])
-    responses = { ...response, ...responses }
+    const response = await prompt([question]);
+    responses = { ...response, ...responses };
   }
 
-  return responses
-}
+  return responses;
+};

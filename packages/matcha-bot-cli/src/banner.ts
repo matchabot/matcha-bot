@@ -1,6 +1,6 @@
-import figlet from "figlet"
-import gradient from "gradient-string"
-import { version } from "./version"
+import figlet from "figlet";
+import gradient from "gradient-string";
+import { version } from "./version";
 /// immport fonts
 
 /**
@@ -8,7 +8,7 @@ import { version } from "./version"
  * @param banner
  */
 export const printBanner = (banner: string) => {
-  console.log(gradient.rainbow(figlet.textSync(banner)))
+  console.log(gradient.rainbow(figlet.textSync(banner)));
 
-  console.log(`Version: ${version} 🍵\r\n`)
-}
+  console.log(`Version: ${version} 🍵\r\n`);
+};

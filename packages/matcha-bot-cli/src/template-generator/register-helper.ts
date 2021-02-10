@@ -1,7 +1,7 @@
-import Handlebars from "handlebars"
+import Handlebars from "handlebars";
 
-import _ from "lodash"
-import moment from "moment"
+import _ from "lodash";
+import moment from "moment";
 
 export interface HelperDelegate {
   (
@@ -11,46 +11,46 @@ export interface HelperDelegate {
     arg3?: any,
     arg4?: any,
     arg5?: any
-  ): any
+  ): any;
 }
 
-export const EjsContext: Record<string, unknown> = {}
+export const EjsContext: Record<string, unknown> = {};
 
 export const registerHelper = function (name: string, fn: HelperDelegate) {
-  Handlebars.registerHelper(name, fn)
-  EjsContext[name] = fn
-}
+  Handlebars.registerHelper(name, fn);
+  EjsContext[name] = fn;
+};
 
 export const registerHelpers = () => {
   registerHelper("camelCase", function (s) {
-    return _.camelCase(s)
-  })
+    return _.camelCase(s);
+  });
 
   registerHelper("upperCamelCase", function (s) {
-    return _.upperFirst(_.camelCase(s))
-  })
+    return _.upperFirst(_.camelCase(s));
+  });
 
   registerHelper("snakeCase", function (s) {
-    return _.snakeCase(s)
-  })
+    return _.snakeCase(s);
+  });
 
   registerHelper("kebabCase", function (s) {
-    return _.kebabCase(s)
-  })
+    return _.kebabCase(s);
+  });
 
   registerHelper("toLowerCase", function (s) {
-    return s.toLowerCase()
-  })
+    return s.toLowerCase();
+  });
 
   registerHelper("toUpperCase", function (s) {
-    return s.toUpperCase()
-  })
+    return s.toUpperCase();
+  });
 
   registerHelper("formatDate", function (d, format) {
-    return moment(d).format(format)
-  })
+    return moment(d).format(format);
+  });
 
   registerHelper("currentDate", function () {
-    return moment()
-  })
-}
+    return moment();
+  });
+};

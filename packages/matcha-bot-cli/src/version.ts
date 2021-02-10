@@ -1,3 +1,3 @@
-import Package from "../package.json"
+import Package from "../package.json";
 
-export const version = Package.version
+export const version = Package.version;

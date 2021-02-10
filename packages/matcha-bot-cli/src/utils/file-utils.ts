@@ -1,4 +1,4 @@
-import path from "path"
+import path from "path";
 
 import {
   existsSync,
@@ -6,13 +6,13 @@ import {
   copyFileSync,
   readdirSync,
   lstatSync,
-  readFileSync
-} from "fs"
+  readFileSync,
+} from "fs";
 
 export type CopyAction = {
-  source: string
-  target: string
-}
+  source: string;
+  target: string;
+};
 
 /**
  * Walk recursively to a directory and return a list of CopyAction objects
@@ -26,35 +26,35 @@ export const walkFolderAndPrepareTransformActions = (
   to: string,
   currentActions: CopyAction[] = [] // Empty array
 ): CopyAction[] => {
-  const fileEntries = readdirSync(from)
+  const fileEntries = readdirSync(from);
 
   const res = fileEntries.reduce(
     (accumulator, currentFile) => {
       // case of a file
       if (lstatSync(path.join(from, currentFile)).isFile()) {
-        const fromPath = path.join(from, currentFile)
-        const destPath = path.join(to, currentFile)
+        const fromPath = path.join(from, currentFile);
+        const destPath = path.join(to, currentFile);
         const fileAction: CopyAction = {
           source: fromPath,
-          target: destPath
-        }
-        return [...accumulator, fileAction]
+          target: destPath,
+        };
+        return [...accumulator, fileAction];
       }
       // case of a directory
       const childActions = walkFolderAndPrepareTransformActions(
         path.join(from, currentFile),
         path.join(to, currentFile),
         currentActions
-      )
+      );
 
-      return [...accumulator, ...childActions]
+      return [...accumulator, ...childActions];
     },
 
     currentActions
-  )
+  );
 
-  return res
-}
+  return res;
+};
 
 /**
  * Copy a folder to a desired destination
@@ -67,39 +67,37 @@ export const copyFolderSync = (
   confirmWriteExistingFile: (filePath: string) => boolean = (filePath) => true
 ) => {
   if (!existsSync(to)) {
-    mkdirSync(to)
+    mkdirSync(to);
   }
   readdirSync(from).forEach((element) => {
     if (lstatSync(path.join(from, element)).isFile()) {
-      copyFileSync(path.join(from, element), path.join(to, element))
+      copyFileSync(path.join(from, element), path.join(to, element));
     } else {
       copyFolderSync(
         path.join(from, element),
         path.join(to, element),
         confirmWriteExistingFile
-      )
+      );
     }
-  })
-}
+  });
+};
 /**
  * Return the first existing filePath from a list of possibles filePaths
  * @param filePaths
  */
 export const findFirstExisting = (filePaths: ReadonlyArray<string>) => {
-  const resultFile = filePaths.find((filePath) => existsSync(filePath))
-  return resultFile
-}
+  const resultFile = filePaths.find((filePath) => existsSync(filePath));
+  return resultFile;
+};
 
 export const findFirstRecFile = (filePath: string) => {
+  if (path.resolve(filePath, ".."))
+    if (!existsSync(filePath)) {
+      return filePath;
+    }
 
-  if(path.resolve(filePath,".."))
-
-  if (!existsSync(filePath)) {
-    return filePath
-  }
-
-  const parentFilePath = path.join("../",filePath)
-}
+  const parentFilePath = path.join("../", filePath);
+};
 
 /**
  *
@@ -109,10 +107,10 @@ export const findFirstRecFile = (filePath: string) => {
  * @param currentDir the current directory
  */
 export const localPath = (fullPath?: string, currentDir?: string) => {
-  const dir = currentDir ?? process.cwd()
-  if (!fullPath) return ""
+  const dir = currentDir ?? process.cwd();
+  if (!fullPath) return "";
   if (fullPath.startsWith(dir)) {
-    return `.${fullPath.substring(dir.length)}`
+    return `.${fullPath.substring(dir.length)}`;
   }
-  return fullPath
-}
+  return fullPath;
+};

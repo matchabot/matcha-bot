@@ -1,5 +1,5 @@
-import { version } from "../version"
-import moment from "moment"
+import { version } from "../version";
+import moment from "moment";
 
 export const getSystemVariables = () => {
   return {
@@ -10,8 +10,8 @@ export const getSystemVariables = () => {
     __currentDay: moment().format(""),
     process: {
       env: {
-        ...process.env
-      }
-    }
-  }
-}
+        ...process.env,
+      },
+    },
+  };
+};

@@ -1,6 +1,6 @@
-const path = require("path")
-const CopyPlugin = require("copy-webpack-plugin")
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -9,13 +9,13 @@ module.exports = {
   devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, "lib"),
-    filename: "index.js"
+    filename: "index.js",
   },
   resolve: {
-    extensions: [".ts", ".js"] //resolve all the modules other than index.ts,
+    extensions: [".ts", ".js"], //resolve all the modules other than index.ts,
   },
   plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
     /*    new CopyPlugin({
       patterns: [{ from: "./init_template/", to: "./init_template" }]
     })*/
@@ -24,7 +24,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       // ...plugins
-    ]
+    ],
   },
   module: {
     rules: [
@@ -35,24 +35,24 @@ module.exports = {
             presets: ["@babel/preset-env", "@babel/preset-typescript"],
             plugins: [
               "@babel/plugin-proposal-class-properties",
-              "@babel/plugin-transform-runtime"
-            ]
-          }
+              "@babel/plugin-transform-runtime",
+            ],
+          },
         },
         test: /\.ts?$/,
         exclude: [
           path.resolve(__dirname, "./bin"),
-          path.resolve(__dirname, "./node_modules")
-        ]
+          path.resolve(__dirname, "./node_modules"),
+        ],
       },
       {
         test: /\.(flf)$/i,
         loader: "file-loader",
         options: {
           outputPath: "../fonts",
-          name: "[name].[ext]"
-        }
-      }
-    ]
-  }
-}
+          name: "[name].[ext]",
+        },
+      },
+    ],
+  },
+};

@@ -1,6 +1,6 @@
 declare module "*.json" {
-  const value: any
-  export default value
+  const value: any;
+  export default value;
 }
 
 type ObjectKeys<T> = T extends object
@@ -9,8 +9,8 @@ type ObjectKeys<T> = T extends object
   ? []
   : T extends Array<any> | string
   ? string[]
-  : never
+  : never;
 
 interface ObjectConstructor {
-  keys<T>(o: T): ObjectKeys<T>
+  keys<T>(o: T): ObjectKeys<T>;
 }
