@@ -20,7 +20,7 @@ The complete documentation of the project is available at [https://www.matchabot
 - ✅ Easy to use **in project** generator
 - ✅ You can create your **own generator by project**, or use a **global templates repository**
 - ✅ Templating language support: [HandleBars](https://handlebarsjs.com/) and [EJS](https://ejs.co/)
-- ✅ Powerfull command line support: automatic **CLI arguments** and **automatic prompts** for missing arguments
+- ✅ Powerful command line support: automatic **CLI arguments** and **automatic prompts** for missing arguments
 - ✅ Simplified workflow to create **new generators** for you **own project**
 - ✅ Debug mode
 - ✅ **Add new file** to your project
@@ -29,8 +29,8 @@ The complete documentation of the project is available at [https://www.matchabot
 
 ## Benefits
 
-- ✅ **Simple** and **Powerfull**
-- ✅ **Save time** and **Boost** your **productivty**
+- ✅ **Simple** and **Powerful**
+- ✅ **Save time** and **Boost** your **productivity**
 - ✅ Enforce a **consistent** project structure
 - ✅ **Easier** team onboarding with a **codified** best practices **stored inside** each project
 - ✅ Fun to use 🦄
@@ -102,7 +102,7 @@ _matchabot
 
 In this example, the `_matchabot` is composed of 2 **generators**
 
-- licence
+- license
 - react-app
 
 Each **generator** is defined by a `matchabot.json`file
@@ -117,7 +117,7 @@ Example for `license`
 }
 ```
 
-Each subdirectory contains a definition of a **command** asociated with a **generator**
+Each subdirectory contains a definition of a **command** associated with a **generator**
 
 For the `react-app`generator we have 2 commands:
 
